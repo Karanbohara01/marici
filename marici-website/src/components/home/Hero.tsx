@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Sparkles, ChevronLeft, ChevronRight, Mouse } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
 interface Slide {
@@ -147,10 +147,7 @@ export default function Hero({ initialSlides }: { initialSlides?: Slide[] }) {
                             }}
                             className="w-full flex flex-col items-center"
                         >
-                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-400 text-xs font-bold uppercase tracking-widest mb-10 backdrop-blur-md shadow-lg">
-                                <Sparkles className="w-3.5 h-3.5" />
-                                Next-Gen Enterprise Solutions
-                            </div>
+
 
                             <div className="max-w-4xl text-center">
                                 <h1 className="text-6xl md:text-8xl font-outfit font-black tracking-tight text-white mb-8 leading-[0.95]">
@@ -210,6 +207,12 @@ export default function Hero({ initialSlides }: { initialSlides?: Slide[] }) {
                             }`}
                     />
                 ))}
+            </div>
+
+            {/* Scroll Indicator */}
+            <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3 scroll-indicator">
+                <Mouse className="w-5 h-5 text-slate-500" strokeWidth={1.5} />
+                <div className="w-[1px] h-8 bg-gradient-to-b from-slate-500 to-transparent"></div>
             </div>
         </section>
     );

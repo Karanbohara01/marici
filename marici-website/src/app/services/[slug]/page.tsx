@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import connectToDatabase from "@/lib/mongoose";
 import { Service } from "@/models/Service";
-import { motion } from "framer-motion";
 import ServiceDetailsClient from "@/app/services/[slug]/ServiceDetailsClient";
 
 export const dynamic = "force-dynamic";

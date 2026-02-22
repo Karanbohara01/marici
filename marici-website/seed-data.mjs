@@ -1,4 +1,22 @@
 import mongoose from 'mongoose';
+import fs from 'fs';
+import path from 'path';
+
+// Manual env loading
+if (!process.env.MONGODB_URI) {
+    const envPath = path.join(process.cwd(), '.env.local');
+    if (fs.existsSync(envPath)) {
+        const envContent = fs.readFileSync(envPath, 'utf8');
+        for (const line of envContent.split('\n')) {
+            const stripped = line.trim();
+            if (stripped.startsWith('MONGODB_URI=')) {
+                const idx = stripped.indexOf('=');
+                process.env.MONGODB_URI = stripped.substring(idx + 1).trim();
+                break;
+            }
+        }
+    }
+}
 
 const MONGO_URI = process.env.MONGODB_URI;
 
@@ -80,7 +98,7 @@ const blogs = [
         excerpt: "Achieving global scale and high availability with modern distributed data stores.",
         content: "Data consistency is the challenge of our time...",
         author: "Maya Patel",
-        coverImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=1200",
+        coverImage: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=1200",
         tags: ["Data", "Infrastructure", "Scale"],
         isFeatured: false
     },
@@ -90,7 +108,7 @@ const blogs = [
         excerpt: "How design-led engineering creates products that people actually love to use.",
         content: "Aesthetics meet functionality in the browser...",
         author: "Oliver Bennett",
-        coverImage: "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?q=80&w=1200",
+        coverImage: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1200",
         tags: ["Design", "Frontend", "User Experience"],
         isFeatured: false
     },

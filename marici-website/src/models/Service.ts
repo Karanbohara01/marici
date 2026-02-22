@@ -24,6 +24,7 @@ const ServiceSchema = new Schema<IService>(
             {
                 title: { type: String, required: true },
                 description: { type: String, required: true },
+                _id: false
             },
         ],
         order: { type: Number, default: 0 },

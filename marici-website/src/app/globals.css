@@ -60,6 +60,15 @@ body {
     @apply bg-slate-900/40 backdrop-blur-xl border border-slate-700/50 shadow-2xl rounded-2xl;
   }
 
+  .glass-panel-hover {
+    @apply bg-slate-900/40 backdrop-blur-xl border border-slate-700/50 shadow-2xl rounded-2xl transition-all duration-500;
+  }
+
+  .glass-panel-hover:hover {
+    border-color: rgba(59, 130, 246, 0.25);
+    box-shadow: 0 0 30px -5px rgba(59, 130, 246, 0.08), 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+
   .glass-dark {
     @apply bg-black/40 backdrop-blur-2xl border border-white/10 shadow-2xl;
   }
@@ -78,5 +87,95 @@ body {
 
   .section-label span {
     @apply w-12 h-[2px] bg-blue-400/30;
+  }
+
+  /* Nav link with animated underline */
+  .nav-link {
+    @apply relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-[-6px] left-0 h-[2px] w-0 bg-blue-400 rounded-full;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    @apply w-full;
+  }
+
+  /* Glow utilities */
+  .glow-blue {
+    box-shadow: 0 0 40px -10px rgba(59, 130, 246, 0.3);
+  }
+
+  .glow-blue-subtle {
+    box-shadow: 0 0 60px -15px rgba(59, 130, 246, 0.15);
+  }
+
+  /* Gradient border effect */
+  .border-gradient {
+    position: relative;
+  }
+
+  .border-gradient::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), rgba(139, 92, 246, 0.3), transparent);
+  }
+}
+
+/* Shimmer animation for badges */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(59, 130, 246, 0.08) 50%,
+      transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite ease-in-out;
+}
+
+/* Scroll indicator bounce */
+@keyframes bounce-slow {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.scroll-indicator {
+  animation: bounce-slow 2.5s infinite ease-in-out;
+}
+
+/* Counter number animation helper */
+@keyframes count-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

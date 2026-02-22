@@ -104,70 +104,91 @@ export default function AboutClient({ team }: { team: any[] }) {
             </section>
 
             {/* Leadership Team */}
-            <section className="py-24 bg-slate-950">
-                <div className="container mx-auto px-6 max-w-7xl">
-                    <div className="mb-16">
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
+            <section className="py-32 bg-slate-950 relative overflow-hidden">
+                {/* Section Depth Glow */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
+
+                <div className="container mx-auto px-6 max-w-7xl relative z-10">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
+                        <div className="max-w-2xl">
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                className="section-label mb-8"
+                            >
+                                <span></span>
+                                Leadership
+                            </motion.div>
+                            <h2 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tighter uppercase leading-[0.9]">
+                                Executive <br />
+                                <span className="text-gradient">Council.</span>
+                            </h2>
+                        </div>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="section-label mb-8 flex items-center gap-4"
+                            className="text-slate-400 text-lg max-w-md font-medium leading-relaxed pb-2"
                         >
-                            <span className="w-8 h-[1px] bg-blue-400"></span>
-                            <span className="text-xs font-bold uppercase tracking-widest text-blue-400">Leadership</span>
-                        </motion.div>
-                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tighter uppercase">
-                            Executive <span className="text-gradient">Council.</span>
-                        </h2>
+                            Our leadership team brings decades of combined experience in engineering, design, and strategic operations.
+                        </motion.p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                    <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 ${team.length <= 2 ? 'lg:justify-center' : ''}`}>
                         {team.length > 0 ? team.map((member, index) => (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="group"
+                                transition={{ delay: index * 0.1, duration: 0.6 }}
+                                className="group relative"
                             >
-                                <div className="relative overflow-hidden bg-slate-900 aspect-[4/5] mb-8 border border-slate-800 rounded-2xl shadow-premium">
-                                    <Image
-                                        src={member.imageUrl || "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop"}
-                                        alt={member.name}
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                                        className="object-cover scale-100 group-hover:scale-110 transition-transform duration-1000 opacity-90 group-hover:opacity-100"
-                                    />
-                                    <div className="absolute inset-0 bg-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                </div>
-                                <h3 className="text-2xl font-bold text-white mb-2 uppercase tracking-tighter group-hover:text-blue-400 transition-colors">
-                                    {member.name}
-                                </h3>
-                                <div className="text-[10px] text-blue-400 font-jet-mono font-black mb-6 uppercase tracking-[0.2em]">{member.role}</div>
-                                {member.bio && (
-                                    <p className="text-slate-400 text-base leading-relaxed mb-6 font-medium line-clamp-3">
-                                        {member.bio}
-                                    </p>
-                                )}
-                                <div className="flex gap-4">
-                                    {member.socialLinks?.linkedin && (
-                                        <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-jet-mono font-bold text-slate-500 uppercase tracking-widest hover:text-blue-400 transition-colors">
-                                            <Linkedin className="w-3.5 h-3.5" />
-                                            LN
-                                        </a>
-                                    )}
-                                    {member.socialLinks?.twitter && (
-                                        <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-jet-mono font-bold text-slate-500 uppercase tracking-widest hover:text-blue-400 transition-colors">
-                                            <Twitter className="w-3.5 h-3.5" />
-                                            TW
-                                        </a>
-                                    )}
+                                <div className="glass-panel p-6 pb-12 h-full flex flex-col hover:border-blue-500/40 transition-all duration-500 hover:-translate-y-2">
+                                    <div className="relative overflow-hidden aspect-[4/5] mb-10 rounded-2xl border border-slate-800/50 bg-slate-950">
+                                        <Image
+                                            src={member.imageUrl || "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop"}
+                                            alt={member.name}
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                                            className="object-cover grayscale group-hover:grayscale-0 scale-100 group-hover:scale-110 transition-all duration-1000 opacity-80 group-hover:opacity-100"
+                                        />
+                                        <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    </div>
+
+                                    <div className="flex-grow">
+                                        <div className="text-[10px] text-blue-400 font-jet-mono font-black mb-4 uppercase tracking-[0.3em] flex items-center gap-3">
+                                            <span className="w-6 h-[1px] bg-blue-500/40"></span>
+                                            {member.role}
+                                        </div>
+                                        <h3 className="text-3xl font-black text-white mb-6 uppercase tracking-tighter leading-none group-hover:text-blue-400 transition-colors">
+                                            {member.name}
+                                        </h3>
+                                        {member.bio && (
+                                            <p className="text-slate-400 text-sm leading-relaxed mb-8 font-medium line-clamp-3 group-hover:text-slate-300 transition-colors">
+                                                {member.bio}
+                                            </p>
+                                        )}
+                                    </div>
+
+                                    <div className="flex items-center gap-6 pt-6 border-t border-slate-800/50">
+                                        {member.socialLinks?.linkedin && (
+                                            <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-400 transition-colors">
+                                                <Linkedin className="w-5 h-5" strokeWidth={1.5} />
+                                            </a>
+                                        )}
+                                        {member.socialLinks?.twitter && (
+                                            <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-400 transition-colors">
+                                                <Twitter className="w-5 h-5" strokeWidth={1.5} />
+                                            </a>
+                                        )}
+                                    </div>
                                 </div>
                             </motion.div>
                         )) : (
-                            <div className="col-span-full text-center py-20 text-slate-600 uppercase text-xs font-jet-mono font-black tracking-[0.3em] bg-slate-900/20 rounded-2xl border border-dashed border-slate-800">
-                                COUNCIL STATUS: UNAVAILABLE
+                            <div className="col-span-full text-center py-24 text-slate-600 uppercase text-xs font-jet-mono font-black tracking-[0.4em] bg-slate-900/10 rounded-3xl border border-dashed border-slate-800">
+                                COUNCIL STATUS: PENDING ARCHITECTURE
                             </div>
                         )}
                     </div>

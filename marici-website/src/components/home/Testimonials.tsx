@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
+import { Quote, Star } from "lucide-react";
+import Image from "next/image";
 
-const testimonials = [
+const fallbackTestimonials = [
     {
         quote: "Marici Technology completely transformed our legacy architecture. Their engineering team delivered a highly available, scalable system that reduced costs by 40%.",
         author: "Sarah Jenkins",
@@ -22,12 +23,15 @@ const testimonials = [
 ];
 
 export default function Testimonials({ initialTestimonials }: { initialTestimonials?: any[] }) {
-    const displayTestimonials = initialTestimonials && initialTestimonials.length > 0 ? initialTestimonials : testimonials;
+    const displayTestimonials = initialTestimonials && initialTestimonials.length > 0 ? initialTestimonials : fallbackTestimonials;
 
     return (
-        <section className="py-24 bg-slate-950 relative overflow-hidden">
+        <section className="py-32 bg-slate-950 relative overflow-hidden">
+            {/* Background Glow */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-600/3 rounded-full blur-[120px] pointer-events-none" />
+
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
                     <div className="max-w-2xl">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
@@ -38,17 +42,26 @@ export default function Testimonials({ initialTestimonials }: { initialTestimoni
                             <span></span>
                             Our Impact
                         </motion.div>
-                        <h2 className="text-4xl md:text-6xl font-outfit font-black text-white leading-tight tracking-tight uppercase">
+                        <h2 className="text-5xl md:text-7xl font-outfit font-black text-white leading-[0.9] tracking-tight uppercase">
                             Global Trust. <br />
                             <span className="text-gradient">Real Results.</span>
                         </h2>
                     </div>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-slate-400 text-lg max-w-md font-medium leading-relaxed pb-2"
+                    >
+                        Hear from the leaders and innovators we&apos;ve partnered with to deliver transformative results.
+                    </motion.p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {displayTestimonials.map((item: any, index: number) => {
                         const authorName = item.name || item.author || "Client";
                         const quote = item.content || item.quote || "";
+                        const avatarUrl = item.avatarUrl || item.imageUrl;
                         const firstChar = authorName.charAt(0);
 
                         return (
@@ -58,20 +71,35 @@ export default function Testimonials({ initialTestimonials }: { initialTestimoni
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                className="glass-panel p-10 flex flex-col group hover:border-blue-500/20 transition-all duration-500"
+                                className="glass-panel-hover p-10 flex flex-col group"
                             >
-                                <div className="mb-8">
-                                    <div className="w-10 h-10 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
-                                        <Quote className="w-5 h-5 fill-current" />
-                                    </div>
+                                {/* Rating Stars */}
+                                <div className="flex gap-1 mb-8">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star key={i} className="w-4 h-4 text-blue-400 fill-blue-400" />
+                                    ))}
                                 </div>
+
                                 <p className="text-lg text-slate-300 mb-10 leading-relaxed font-medium flex-grow">
-                                    &ldquo;{quote.substring(0, 180)}{quote.length > 180 ? "..." : ""}&rdquo;
+                                    &ldquo;{quote.substring(0, 200)}{quote.length > 200 ? "..." : ""}&rdquo;
                                 </p>
-                                <div className="flex items-center gap-4 pt-8 border-t border-slate-800">
-                                    <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center font-bold text-sm text-slate-100 uppercase shadow-xs group-hover:bg-blue-600/20 group-hover:text-blue-400 transition-all duration-500 border border-slate-700/50">
-                                        {firstChar}
-                                    </div>
+
+                                <div className="flex items-center gap-4 pt-8 border-t border-slate-800/50">
+                                    {avatarUrl ? (
+                                        <div className="w-12 h-12 rounded-xl overflow-hidden border border-slate-700/50 relative shrink-0">
+                                            <Image
+                                                src={avatarUrl}
+                                                alt={authorName}
+                                                fill
+                                                sizes="48px"
+                                                className="object-cover"
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center font-bold text-sm text-slate-100 uppercase shadow-xs group-hover:bg-blue-600/20 group-hover:text-blue-400 transition-all duration-500 border border-slate-700/50 shrink-0">
+                                            {firstChar}
+                                        </div>
+                                    )}
                                     <div>
                                         <div className="font-outfit font-black text-white uppercase tracking-tight">{authorName}</div>
                                         <div className="text-[10px] font-jet-mono font-black text-slate-500 uppercase tracking-[0.2em] mt-1">{item.role || "Executive"}</div>

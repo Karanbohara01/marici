@@ -2,6 +2,7 @@ import Hero from "@/components/home/Hero";
 import ServicesOverview from "@/components/home/ServicesOverview";
 import Stats from "@/components/home/Stats";
 import Testimonials from "@/components/home/Testimonials";
+import CallToAction from "@/components/home/CallToAction";
 
 import connectToDatabase from "@/lib/mongoose";
 import { Service } from "@/models/Service";
@@ -27,21 +28,10 @@ export default async function Home() {
     console.error("Home page data fetch failed:", error);
   }
 
-  // Convert ObjectIds to strings for serialization
-  const serializedServices = (services || []).map((s: any) => ({
-    ...s,
-    _id: s._id?.toString() || ""
-  }));
-
-  const serializedTestimonials = (testimonials || []).map((t: any) => ({
-    ...t,
-    _id: t._id?.toString() || ""
-  }));
-
-  const serializedSlides = (heroSlides || []).map((s: any) => ({
-    ...s,
-    _id: s._id?.toString() || ""
-  }));
+  // Convert to plain objects for serialization
+  const serializedServices = JSON.parse(JSON.stringify(services || []));
+  const serializedTestimonials = JSON.parse(JSON.stringify(testimonials || []));
+  const serializedSlides = JSON.parse(JSON.stringify(heroSlides || []));
 
   return (
     <>
@@ -49,6 +39,7 @@ export default async function Home() {
       <ServicesOverview initialServices={serializedServices} />
       <Stats />
       <Testimonials initialTestimonials={serializedTestimonials} />
+      <CallToAction />
     </>
   );
 }

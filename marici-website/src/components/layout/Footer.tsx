@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Facebook, Twitter, Linkedin, Instagram, ArrowUpRight } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Instagram, ArrowUpRight, ArrowUp } from "lucide-react";
 
 export default function Footer({ settings }: { settings: any }) {
     const currentYear = new Date().getFullYear();
@@ -27,8 +27,15 @@ export default function Footer({ settings }: { settings: any }) {
         ],
     };
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
     return (
         <footer className="bg-slate-950 border-t border-slate-900 pt-20 pb-10 font-sans overflow-hidden relative">
+            {/* Subtle gradient */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[200px] bg-blue-600/3 rounded-full blur-[120px] pointer-events-none" />
+
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 mb-16">
                     {/* Brand Column */}
@@ -42,7 +49,7 @@ export default function Footer({ settings }: { settings: any }) {
                         </Link>
                         <h3 className="text-3xl md:text-5xl font-accent font-bold text-white leading-none tracking-tighter uppercase mb-12 max-w-sm">
                             Ready to build <br />
-                            <span className="text-blue-400">something real?</span>
+                            <span className="text-gradient">something real?</span>
                         </h3>
                         <Link
                             href="/contact"
@@ -80,10 +87,20 @@ export default function Footer({ settings }: { settings: any }) {
 
                 {/* Bottom Bar */}
                 <div className="mt-12 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div className="font-mono text-[11px] font-bold text-slate-500 uppercase tracking-widest text-center w-full">
+                    <div className="font-mono text-[11px] font-bold text-slate-500 uppercase tracking-widest text-center md:text-left">
                         © {currentYear} Marici Technology Pvt. Ltd.
                     </div>
 
+                    {/* Back to Top */}
+                    <button
+                        onClick={scrollToTop}
+                        className="group flex items-center gap-3 text-[11px] font-mono font-bold text-slate-500 uppercase tracking-widest hover:text-blue-400 transition-colors"
+                    >
+                        Back to top
+                        <div className="w-10 h-10 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center justify-center group-hover:bg-blue-600/10 group-hover:border-blue-500/30 group-hover:-translate-y-1 transition-all duration-300">
+                            <ArrowUp className="w-4 h-4" />
+                        </div>
+                    </button>
                 </div>
             </div>
         </footer>
