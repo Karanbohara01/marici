@@ -96,13 +96,53 @@ body {
 
   .nav-link::after {
     content: '';
-    @apply absolute bottom-[-6px] left-0 h-[2px] w-0 bg-blue-400 rounded-full;
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    @apply absolute bottom-[-6px] left-1/2 h-[2px] w-0 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full;
+    transform: translateX(-50%);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .nav-link:hover::after,
   .nav-link.active::after {
     @apply w-full;
+  }
+
+  /* Glass pill container for nav links */
+  .nav-glass-pill {
+    @apply bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-2xl;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04),
+      0 0 20px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Premium CTA button with gradient + shimmer */
+  .btn-cta {
+    @apply relative inline-flex items-center justify-center gap-2 px-7 py-2.5 font-bold text-[12px] uppercase tracking-[0.15em] rounded-xl text-white overflow-hidden;
+    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
+    background-size: 200% 200%;
+    animation: cta-gradient 4s ease infinite;
+    box-shadow: 0 0 20px -4px rgba(99, 102, 241, 0.4),
+      0 4px 12px -2px rgba(59, 130, 246, 0.2);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 30px -4px rgba(99, 102, 241, 0.55),
+      0 8px 20px -4px rgba(59, 130, 246, 0.3);
+  }
+
+  .btn-cta:active {
+    transform: translateY(0) scale(0.97);
+  }
+
+  .btn-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    animation: cta-shimmer 3s infinite ease-in-out;
   }
 
   /* Glow utilities */
@@ -115,9 +155,7 @@ body {
   }
 
   /* Gradient border effect */
-  .border-gradient {
-    position: relative;
-  }
+  .border-gradient {}
 
   .border-gradient::after {
     content: '';
@@ -128,6 +166,96 @@ body {
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), rgba(139, 92, 246, 0.3), transparent);
   }
+
+  /* Top-edge glow for scrolled navbar */
+  .navbar-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.4), rgba(59, 130, 246, 0.6), rgba(99, 102, 241, 0.4), transparent);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .navbar-glow.scrolled::before {
+    opacity: 1;
+  }
+
+  /* Mobile nav overlay */
+  .mobile-nav-overlay {
+    @apply fixed inset-0 z-40 flex flex-col;
+    background: linear-gradient(180deg, rgba(2, 6, 23, 0.98) 0%, rgba(15, 23, 42, 0.98) 100%);
+    backdrop-filter: blur(24px) saturate(1.5);
+  }
+
+  /* Grid background pattern */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Active link left-border accent for mobile */
+  .mobile-link-active {
+    border-left: 2px solid transparent;
+    border-image: linear-gradient(180deg, #3b82f6, #8b5cf6) 1;
+    padding-left: 16px;
+  }
+}
+
+/* ========== Animations ========== */
+
+/* CTA gradient animation */
+@keyframes cta-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* CTA shimmer sweep */
+@keyframes cta-shimmer {
+  0% {
+    left: -100%;
+  }
+
+  60% {
+    left: 100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* Pulse dot for active nav indicator */
+@keyframes pulse-dot {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.8);
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2.5s ease-in-out infinite;
 }
 
 /* Shimmer animation for badges */
