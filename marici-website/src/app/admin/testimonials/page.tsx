@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Plus, Edit2, Trash2, Loader2, Save, X } from "lucide-react";
+import ImageUpload from "@/components/admin/ImageUpload";
 
 type Testimonial = {
     _id: string;
@@ -142,17 +143,12 @@ export default function TestimonialsAdmin() {
                                 </div>
                             </div>
 
-                            <div className="sm:col-span-3">
-                                <label className="block text-sm font-medium text-gray-700">Avatar URL</label>
-                                <div className="mt-1">
-                                    <input
-                                        type="text"
-                                        required
-                                        value={formData.avatarUrl}
-                                        onChange={(e) => setFormData({ ...formData, avatarUrl: e.target.value })}
-                                        className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border"
-                                    />
-                                </div>
+                            <div className="sm:col-span-6">
+                                <ImageUpload
+                                    label="Client Avatar"
+                                    value={formData.avatarUrl}
+                                    onChange={(url) => setFormData({ ...formData, avatarUrl: url })}
+                                />
                             </div>
 
                             <div className="sm:col-span-1">

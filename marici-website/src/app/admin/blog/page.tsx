@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, X, Save, AlertCircle, Loader2, Upload, Image as ImageIcon } from "lucide-react";
+import ImageUpload from "@/components/admin/ImageUpload";
 
 interface BlogPost {
     _id?: string;
@@ -24,7 +25,6 @@ export default function BlogAdmin() {
     const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
     const [error, setError] = useState("");
     const [saving, setSaving] = useState(false);
-    const [uploading, setUploading] = useState(false);
 
     // Form state
     const [formData, setFormData] = useState<BlogPost>({
@@ -135,34 +135,6 @@ export default function BlogAdmin() {
         }
     };
 
-    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-
-        setUploading(true);
-        setError("");
-
-        const formData = new FormData();
-        formData.append("file", file);
-
-        try {
-            const res = await fetch("/api/upload", {
-                method: "POST",
-                body: formData,
-            });
-
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error || "Upload failed");
-
-            setFormData(prev => ({ ...prev, coverImage: data.url }));
-        } catch (err: any) {
-            setError(err.message);
-        } finally {
-            setUploading(false);
-            // Clear the input
-            e.target.value = "";
-        }
-    };
 
     return (
         <>
@@ -283,47 +255,12 @@ export default function BlogAdmin() {
                                         placeholder="Author name"
                                     />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-[10px] font-bold tracking-widest uppercase opacity-40">Cover Image</label>
-                                    <div className="flex gap-4">
-                                        <div className="flex-grow">
-                                            <input
-                                                type="text"
-                                                value={formData.coverImage}
-                                                onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
-                                                className="w-full bg-foreground/5 border-none p-4 text-sm focus:ring-1 focus:ring-foreground transition-all font-medium"
-                                                placeholder="https://... or upload"
-                                            />
-                                        </div>
-                                        <div className="relative">
-                                            <input
-                                                type="file"
-                                                accept="image/*"
-                                                onChange={handleImageUpload}
-                                                className="absolute inset-0 opacity-0 cursor-pointer"
-                                                disabled={uploading}
-                                            />
-                                            <button
-                                                type="button"
-                                                className="h-full bg-foreground/5 border border-foreground/10 px-4 flex items-center gap-2 hover:bg-foreground/10 transition-colors disabled:opacity-50"
-                                            >
-                                                {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
-                                                <span className="text-[10px] font-bold tracking-widest uppercase">Upload</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    {formData.coverImage && (
-                                        <div className="mt-4 relative aspect-video w-full bg-foreground/5 border border-foreground/10 overflow-hidden group">
-                                            <img
-                                                src={formData.coverImage}
-                                                alt="Preview"
-                                                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                                            />
-                                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                                <p className="text-[10px] font-bold tracking-widest uppercase text-white">Preview</p>
-                                            </div>
-                                        </div>
-                                    )}
+                                <div className="sm:col-span-2">
+                                    <ImageUpload
+                                        label="Cover Image"
+                                        value={formData.coverImage}
+                                        onChange={(url) => setFormData({ ...formData, coverImage: url })}
+                                    />
                                 </div>
                             </div>
 
