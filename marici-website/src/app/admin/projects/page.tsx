@@ -226,7 +226,7 @@ export default function ProjectsAdmin() {
                             <div className="relative h-48 w-full bg-gray-200">
                                 {/* Check if imageUrl is absolute, maybe a placeholder */}
                                 <Image
-                                    src={project.imageUrl.startsWith("http") ? project.imageUrl : "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80"}
+                                    src={project.imageUrl || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80"}
                                     alt={project.title}
                                     fill
                                     className="object-cover"
