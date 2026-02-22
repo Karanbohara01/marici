@@ -1,5 +1,6 @@
 import BlogPost from "@/models/BlogPost";
 import Career from "@/models/Career";
+import { SiteSettings } from "@/models/SiteSettings";
 import connectToDatabase from "./mongoose";
 
 const blogPosts = [
@@ -129,6 +130,51 @@ const careers = [
     }
 ];
 
+const privacyPolicy = `# Privacy Policy
+
+**Last Updated: February 21, 2026**
+
+At **Marici Technology Pvt. Ltd.** ("Marici," "we," "us," or "our"), we are committed to protecting your privacy and ensuring the security of your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our digital services.
+
+## 1. Information We Collect
+
+We may collect personal information that you voluntarily provide to us when you:
+*   Inquire about our services.
+*   Apply for a career opportunity.
+*   Subscribe to our newsletter or updates.
+*   Contact us for support or collaboration.
+
+This information may include your name, email address, phone number, company name, and professional background.
+
+## 2. How We Use Your Information
+
+We use the information we collect to:
+*   Provide, operate, and maintain our services.
+*   Process job applications and recruitment.
+*   Communicate with you regarding service updates and technical support.
+*   Analyze website usage to improve our user experience.
+*   Comply with legal and regulatory obligations.
+
+## 3. Data Security
+
+We implement industry-standard security measures to protect your data from unauthorized access, alteration, disclosure, or destruction. Our systems are engineered with a focus on high availability and rigorous performance requirements.
+
+## 4. Third-Party Disclosures
+
+We do not sell, trade, or otherwise transfer your personal information to outside parties except to trusted third parties who assist us in operating our website and conducting our business, so long as those parties agree to keep this information confidential.
+
+## 5. Your Rights
+
+Depending on your location, you may have rights regarding your personal data, including the right to access, correct, or delete the information we hold about you.
+
+## 6. Contact Us
+
+If you have any questions about this Privacy Policy, please contact us at:
+
+**Email:** contact@maricitech.com  
+**Address:** 123 Tech Park, Innovation City
+`;
+
 export async function seedData() {
     try {
         await connectToDatabase();
@@ -142,6 +188,15 @@ export async function seedData() {
         await Career.deleteMany({});
         await Career.insertMany(careers);
         console.log("Career roles seeded successfully.");
+
+        // Seed SiteSettings (Privacy Policy)
+        let settings = await SiteSettings.findOne();
+        if (settings) {
+            await SiteSettings.findByIdAndUpdate(settings._id, { privacyPolicy }, { new: true });
+        } else {
+            await SiteSettings.create({ privacyPolicy });
+        }
+        console.log("Site settings (Privacy Policy) seeded successfully.");
 
         return { success: true, message: "Data seeded successfully" };
     } catch (error) {

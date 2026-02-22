@@ -14,6 +14,9 @@ export interface ISiteSettings extends Document {
     linkedinUrl?: string;
     instagramUrl?: string;
     stats?: IStat[];
+    privacyPolicy?: string;
+    termsOfService?: string;
+    whatsappNumber?: string;
 }
 
 const defaultStats = [
@@ -35,9 +38,15 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
         stats: {
             type: [{ value: String, label: String }],
             default: defaultStats
-        }
+        },
+        privacyPolicy: String,
+        termsOfService: String,
+        whatsappNumber: { type: String, default: "919876543210" },
     },
     { timestamps: true }
 );
 
-export const SiteSettings = models.SiteSettings || mongoose.model<ISiteSettings>("SiteSettings", SiteSettingsSchema);
+if (models.SiteSettings) {
+    delete (models as any).SiteSettings;
+}
+export const SiteSettings = mongoose.model<ISiteSettings>("SiteSettings", SiteSettingsSchema);

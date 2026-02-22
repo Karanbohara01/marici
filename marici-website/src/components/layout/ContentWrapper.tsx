@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import WhatsAppButton from "./WhatsAppButton";
 
 export default function ContentWrapper({
     children,
@@ -21,6 +22,7 @@ export default function ContentWrapper({
             <Navbar />
             <main className="flex-grow pt-[88px]">{children}</main>
             <Footer />
+            <WhatsAppButton />
         </>
     );
 }

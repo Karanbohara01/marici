@@ -22,6 +22,9 @@ export default function SettingsAdmin() {
             { value: "50M+", label: "Queries Per Second" },
             { value: "10+", label: "Years Innovating" }
         ],
+        privacyPolicy: "",
+        termsOfService: "",
+        whatsappNumber: "",
     });
 
     const fetchSettings = async () => {
@@ -39,6 +42,9 @@ export default function SettingsAdmin() {
                     linkedinUrl: data.linkedinUrl || "",
                     instagramUrl: data.instagramUrl || "",
                     stats: data.stats?.length === 4 ? data.stats : formData.stats,
+                    privacyPolicy: data.privacyPolicy || "",
+                    termsOfService: data.termsOfService || "",
+                    whatsappNumber: data.whatsappNumber || "",
                 });
             }
         } catch (error) {
@@ -131,6 +137,22 @@ export default function SettingsAdmin() {
                                             value={formData.phone}
                                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                             className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-3">
+                                    <label htmlFor="whatsappNumber" className="block text-sm font-medium text-gray-700">
+                                        WhatsApp Number (with country code, no + or spaces)
+                                    </label>
+                                    <div className="mt-1">
+                                        <input
+                                            type="text"
+                                            id="whatsappNumber"
+                                            value={formData.whatsappNumber}
+                                            onChange={(e) => setFormData({ ...formData, whatsappNumber: e.target.value })}
+                                            className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border"
+                                            placeholder="919876543210"
                                         />
                                     </div>
                                 </div>
@@ -268,6 +290,49 @@ export default function SettingsAdmin() {
                                         </div>
                                     </div>
                                 ))}
+                            </div>
+                        </div>
+
+                        {/* Legal Content */}
+                        <div className="pt-8">
+                            <div>
+                                <h3 className="text-lg leading-6 font-medium text-gray-900">Legal Content</h3>
+                                <p className="mt-1 text-sm text-gray-500">
+                                    Edit the content for the Privacy Policy and Terms of Service (Markdown supported).
+                                </p>
+                            </div>
+                            <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4">
+                                <div className="sm:col-span-6">
+                                    <label htmlFor="privacyPolicy" className="block text-sm font-medium text-gray-700">
+                                        Privacy Policy
+                                    </label>
+                                    <div className="mt-1">
+                                        <textarea
+                                            id="privacyPolicy"
+                                            rows={12}
+                                            value={formData.privacyPolicy}
+                                            onChange={(e) => setFormData({ ...formData, privacyPolicy: e.target.value })}
+                                            className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md p-2 font-mono"
+                                            placeholder="# Privacy Policy..."
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-6">
+                                    <label htmlFor="termsOfService" className="block text-sm font-medium text-gray-700">
+                                        Terms of Service
+                                    </label>
+                                    <div className="mt-1">
+                                        <textarea
+                                            id="termsOfService"
+                                            rows={12}
+                                            value={formData.termsOfService}
+                                            onChange={(e) => setFormData({ ...formData, termsOfService: e.target.value })}
+                                            className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md p-2 font-mono"
+                                            placeholder="# Terms of Service..."
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

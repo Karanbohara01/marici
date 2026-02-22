@@ -3,36 +3,21 @@ import { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = "https://maricitechnologies.com";
 
-    return [
-        {
-            url: baseUrl,
-            lastModified: new Date(),
-            changeFrequency: "weekly",
-            priority: 1,
-        },
-        {
-            url: `${baseUrl}/services`,
-            lastModified: new Date(),
-            changeFrequency: "weekly",
-            priority: 0.9,
-        },
-        {
-            url: `${baseUrl}/work`,
-            lastModified: new Date(),
-            changeFrequency: "weekly",
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/about`,
-            lastModified: new Date(),
-            changeFrequency: "monthly",
-            priority: 0.7,
-        },
-        {
-            url: `${baseUrl}/contact`,
-            lastModified: new Date(),
-            changeFrequency: "yearly",
-            priority: 0.5,
-        },
+    const staticRoutes = [
+        { url: "", priority: 1, changeFrequency: "weekly" as const },
+        { url: "/services", priority: 0.9, changeFrequency: "weekly" as const },
+        { url: "/work", priority: 0.8, changeFrequency: "weekly" as const },
+        { url: "/about", priority: 0.7, changeFrequency: "monthly" as const },
+        { url: "/contact", priority: 0.7, changeFrequency: "monthly" as const },
+        { url: "/careers", priority: 0.6, changeFrequency: "weekly" as const },
+        { url: "/blog", priority: 0.6, changeFrequency: "weekly" as const },
+        { url: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
     ];
+
+    return staticRoutes.map((route) => ({
+        url: `${baseUrl}${route.url}`,
+        lastModified: new Date(),
+        changeFrequency: route.changeFrequency,
+        priority: route.priority,
+    }));
 }

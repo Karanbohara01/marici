@@ -52,6 +52,44 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${syne.variable} ${outfit.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground selection:bg-accent selection:text-white flex flex-col min-h-screen`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Marici Technology Pvt. Ltd.",
+              "url": "https://maricitechnologies.com",
+              "logo": "https://maricitechnologies.com/logo.png",
+              "description": "Marici Technology Pvt. Ltd. provides cutting-edge IT solutions, software development, AI solutions, and digital transformation services.",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+91-9876543210",
+                "contactType": "customer service"
+              },
+              "sameAs": [
+                "https://www.linkedin.com/company/marici-technology",
+                "https://twitter.com/maricitech"
+              ]
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Marici Technology",
+              "url": "https://maricitechnologies.com",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://maricitechnologies.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
         <ContentWrapper>{children}</ContentWrapper>
       </body>
     </html>

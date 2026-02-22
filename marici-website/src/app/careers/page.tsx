@@ -3,8 +3,12 @@ import Career from "@/models/Career";
 import CareersClient from "./CareersClient";
 
 export const metadata = {
-    title: "Careers | Marici Technology",
-    description: "Join our team and help us build the future of technology.",
+    title: "Careers | Marici Technology Pvt. Ltd.",
+    description: "Join Marici Technology's engineering hub. Explore open positions in software development, AI engineering, and technical leadership. Build your future with us.",
+    openGraph: {
+        title: "Careers at Marici Technology | Engineering the Future",
+        description: "Explore opportunities to work on world-class technical challenges.",
+    }
 };
 
 async function getCareers() {

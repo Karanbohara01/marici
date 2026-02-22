@@ -19,6 +19,7 @@ export async function PUT(request: Request) {
     try {
         await connectToDatabase();
         const data = await request.json();
+        console.log("PUT /api/settings received data:", data);
         let settings = await SiteSettings.findOne();
 
         if (settings) {
@@ -27,6 +28,7 @@ export async function PUT(request: Request) {
             settings = await SiteSettings.create(data);
         }
 
+        console.log("PUT /api/settings saved settings:", settings);
         return NextResponse.json(settings);
     } catch (error) {
         return NextResponse.json({ error: "Failed to update settings" }, { status: 500 });
