@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = "https://maricitechnologies.com";
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://maricitechnologies.com";
 
     const staticRoutes = [
         { url: "", priority: 1, changeFrequency: "weekly" as const },
@@ -13,7 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: "/blog", priority: 0.6, changeFrequency: "weekly" as const },
         { url: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
     ];
-
     return staticRoutes.map((route) => ({
         url: `${baseUrl}${route.url}`,
         lastModified: new Date(),

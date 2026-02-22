@@ -23,6 +23,8 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://maricitechnologies.com";
+
 export const metadata: Metadata = {
   title: "Marici Technology Pvt. Ltd. | IT Solutions & Digital Transformation",
   description:
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Marici Technology Pvt. Ltd.",
     description: "Innovating the future with dynamic IT services.",
-    url: "https://maricitechnologies.com",
+    url: baseUrl,
     siteName: "Marici Technology",
     locale: "en_US",
     type: "website",
@@ -59,8 +61,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "Marici Technology Pvt. Ltd.",
-              "url": "https://maricitechnologies.com",
-              "logo": "https://maricitechnologies.com/logo.png",
+              "url": baseUrl,
+              "logo": `${baseUrl}/logo.png`,
               "description": "Marici Technology Pvt. Ltd. provides cutting-edge IT solutions, software development, AI solutions, and digital transformation services.",
               "contactPoint": {
                 "@type": "ContactPoint",
@@ -81,10 +83,10 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "Marici Technology",
-              "url": "https://maricitechnologies.com",
+              "url": baseUrl,
               "potentialAction": {
                 "@type": "SearchAction",
-                "target": "https://maricitechnologies.com/search?q={search_term_string}",
+                "target": `${baseUrl}/search?q={search_term_string}`,
                 "query-input": "required name=search_term_string"
               }
             })
