@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
+import { v2 as cloudinary } from "cloudinary";
+
+// Configure Cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request: NextRequest) {
     try {
@@ -25,27 +31,28 @@ export async function POST(request: NextRequest) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
 
-        // Ensure uploads directory exists
-        const uploadDir = path.join(process.cwd(), "public", "uploads");
-        try {
-            await mkdir(uploadDir, { recursive: true });
-        } catch (err) {
-            // Directory might already exist
-        }
+        // Upload to Cloudinary using a promise to handle the stream-like behavior or buffer
+        const uploadResponse = await new Promise((resolve, reject) => {
+            const uploadStream = cloudinary.uploader.upload_stream(
+                {
+                    folder: "marici-uploads",
+                    resource_type: "auto",
+                },
+                (error: any, result: any) => {
+                    if (error) reject(error);
+                    else resolve(result);
+                }
+            );
+            uploadStream.end(buffer);
+        });
 
-        // Create unique filename
-        const filename = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`;
-        const filePath = path.join(uploadDir, filename);
+        const result = uploadResponse as any;
 
-        await writeFile(filePath, buffer);
-
-        const publicUrl = `/uploads/${filename}`;
-
-        return NextResponse.json({ url: publicUrl });
+        return NextResponse.json({ url: result.secure_url });
     } catch (error) {
         console.error("Upload error:", error);
         return NextResponse.json(
-            { error: "Failed to upload file" },
+            { error: "Failed to upload file to Cloudinary" },
             { status: 500 }
         );
     }
