@@ -94,7 +94,7 @@ export default function ServicesOverview({ initialServices }: { initialServices?
                         return (
                             <motion.div key={index} variants={itemVariants}>
                                 <Link
-                                    href={service.href || `/services/${service._id}`}
+                                    href={service.href || `/services/${service.slug || service._id}`}
                                     className="group block h-full bg-white border border-gray-100 p-12 rounded-none hover:border-gray-900 transition-all duration-300 relative"
                                 >
                                     <div className="relative z-10 flex flex-col h-full">
