@@ -8,14 +8,20 @@ export const metadata: Metadata = {
     description: "Enterprise-grade IT services including Web & Mobile Engineering, AI & Machine Learning, Cloud Infrastructure, and Data Engineering by Marici Technology.",
 };
 
-export default async function ServicesPage() {
-    await connectToDatabase();
+export const dynamic = "force-dynamic";
 
-    // Fetch from DB
-    const services = await Service.find().sort({ order: 1, createdAt: -1 }).lean();
+export default async function ServicesPage() {
+    let services: any[] = [];
+    try {
+        await connectToDatabase();
+        // Fetch from DB
+        services = await Service.find().sort({ order: 1, createdAt: -1 }).lean();
+    } catch (error) {
+        console.error("Failed to fetch services during build:", error);
+    }
 
     // Convert to plain objects
-    const plainServices = JSON.parse(JSON.stringify(services));
+    const plainServices = JSON.parse(JSON.stringify(services || []));
 
     return <ServicesClient initialServices={plainServices} />;
 }

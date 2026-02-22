@@ -4,33 +4,6 @@ import { motion } from "framer-motion";
 import { Users, Target, Zap, Globe, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
 
-const team = [
-    {
-        name: "Alex Sterling",
-        role: "Chief Executive Officer",
-        image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop",
-        bio: "Former VP at Fortune 500 tech firms with a vision for digital-first enterprises.",
-    },
-    {
-        name: "Priya Patel",
-        role: "Chief Technology Officer",
-        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop",
-        bio: "AI architect and distributed systems expert leading our core engineering teams.",
-    },
-    {
-        name: "Marcus Johnson",
-        role: "Head of Design",
-        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=800&auto=format&fit=crop",
-        bio: "Award-winning UX/UI designer focused on creating intuitive, human-centric interfaces.",
-    },
-    {
-        name: "Sarah Lin",
-        role: "VP of Product Strategy",
-        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=800&auto=format&fit=crop",
-        bio: "Product visionary translating complex market needs into elegant digital solutions.",
-    },
-];
-
 const values = [
     {
         title: "Innovation First",
@@ -54,10 +27,10 @@ const values = [
     },
 ];
 
-export default function AboutClient() {
+export default function AboutClient({ team }: { team: any[] }) {
     return (
         <div className="min-h-screen bg-white pt-16">
-            {/* Hero Section */}
+            {/* ... hero and values remain same ... */}
             <section className="relative py-12 overflow-hidden bg-white border-b border-gray-50">
                 <div className="container mx-auto px-6 relative z-10 max-w-7xl">
                     <div className="max-w-4xl">
@@ -149,7 +122,7 @@ export default function AboutClient() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                        {team.map((member, index) => (
+                        {team.length > 0 ? team.map((member, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 20 }}
@@ -160,7 +133,7 @@ export default function AboutClient() {
                             >
                                 <div className="relative overflow-hidden bg-gray-50 aspect-[4/5] mb-8 border border-gray-100 grayscale hover:grayscale-0 transition-all duration-700">
                                     <Image
-                                        src={member.image}
+                                        src={member.imageUrl || "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop"}
                                         alt={member.name}
                                         fill
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
@@ -172,19 +145,31 @@ export default function AboutClient() {
                                     {member.name}
                                 </h3>
                                 <div className="text-[11px] text-gray-800 font-bold mb-6 uppercase tracking-widest">{member.role}</div>
-                                <p className="text-gray-800 text-base leading-relaxed mb-6 font-medium">
-                                    {member.bio}
-                                </p>
+                                {member.bio && (
+                                    <p className="text-gray-800 text-base leading-relaxed mb-6 font-medium">
+                                        {member.bio}
+                                    </p>
+                                )}
                                 <div className="flex gap-4">
-                                    {[Linkedin, Twitter].map((Icon, idx) => (
-                                        <a key={idx} href="#" className="flex items-center gap-2 text-[10px] font-bold text-gray-500 uppercase tracking-widest hover:text-black transition-colors">
-                                            <Icon className="w-3 h-3" />
-                                            {idx === 0 ? "LN" : "TW"}
+                                    {member.socialLinks?.linkedin && (
+                                        <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-bold text-gray-500 uppercase tracking-widest hover:text-black transition-colors">
+                                            <Linkedin className="w-3 h-3" />
+                                            LN
                                         </a>
-                                    ))}
+                                    )}
+                                    {member.socialLinks?.twitter && (
+                                        <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-bold text-gray-500 uppercase tracking-widest hover:text-black transition-colors">
+                                            <Twitter className="w-3 h-3" />
+                                            TW
+                                        </a>
+                                    )}
                                 </div>
                             </motion.div>
-                        ))}
+                        )) : (
+                            <div className="col-span-full text-center py-20 text-gray-500 uppercase text-xs font-bold tracking-widest">
+                                No council members found.
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>

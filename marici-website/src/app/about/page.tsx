@@ -10,6 +10,23 @@ export const metadata: Metadata = {
     }
 };
 
-export default function AboutPage() {
-    return <AboutClient />;
+import connectToDatabase from "@/lib/mongoose";
+import { TeamMember } from "@/models/TeamMember";
+
+export const dynamic = "force-dynamic";
+
+async function getTeam() {
+    try {
+        await connectToDatabase();
+        const team = await TeamMember.find().sort({ order: 1, name: 1 }).lean();
+        return JSON.parse(JSON.stringify(team));
+    } catch (error) {
+        console.error("Failed to fetch team during build:", error);
+        return [];
+    }
+}
+
+export default async function AboutPage() {
+    const team = await getTeam();
+    return <AboutClient team={team} />;
 }

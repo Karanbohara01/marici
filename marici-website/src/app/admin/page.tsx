@@ -10,23 +10,34 @@ import { Project } from "@/models/Project";
 import { Testimonial } from "@/models/Testimonial";
 import { TeamMember } from "@/models/TeamMember";
 import Link from "next/link";
+export const dynamic = "force-dynamic";
 
 async function getStats() {
-    await connectToDatabase();
+    try {
+        await connectToDatabase();
 
-    const [servicesCount, projectsCount, testimonialsCount, teamCount] = await Promise.all([
-        Service.countDocuments(),
-        Project.countDocuments(),
-        Testimonial.countDocuments(),
-        TeamMember.countDocuments(),
-    ]);
+        const [servicesCount, projectsCount, testimonialsCount, teamCount] = await Promise.all([
+            Service.countDocuments(),
+            Project.countDocuments(),
+            Testimonial.countDocuments(),
+            TeamMember.countDocuments(),
+        ]);
 
-    return [
-        { name: "Services", stat: servicesCount, icon: Briefcase, color: "bg-blue-500", href: "/admin/services" },
-        { name: "Projects", stat: projectsCount, icon: ImageIcon, color: "bg-emerald-500", href: "/admin/projects" },
-        { name: "Testimonials", stat: testimonialsCount, icon: MessageSquare, color: "bg-amber-500", href: "/admin/testimonials" },
-        { name: "Team Members", stat: teamCount, icon: Users, color: "bg-purple-500", href: "/admin/team" },
-    ];
+        return [
+            { name: "Services", stat: servicesCount, icon: Briefcase, color: "bg-blue-500", href: "/admin/services" },
+            { name: "Projects", stat: projectsCount, icon: ImageIcon, color: "bg-emerald-500", href: "/admin/projects" },
+            { name: "Testimonials", stat: testimonialsCount, icon: MessageSquare, color: "bg-amber-500", href: "/admin/testimonials" },
+            { name: "Team Members", stat: teamCount, icon: Users, color: "bg-purple-500", href: "/admin/team" },
+        ];
+    } catch (error) {
+        console.error("Failed to fetch stats during build:", error);
+        return [
+            { name: "Services", stat: 0, icon: Briefcase, color: "bg-blue-500", href: "/admin/services" },
+            { name: "Projects", stat: 0, icon: ImageIcon, color: "bg-emerald-500", href: "/admin/projects" },
+            { name: "Testimonials", stat: 0, icon: MessageSquare, color: "bg-amber-500", href: "/admin/testimonials" },
+            { name: "Team Members", stat: 0, icon: Users, color: "bg-purple-500", href: "/admin/team" },
+        ];
+    }
 }
 
 export default async function AdminDashboard() {

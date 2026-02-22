@@ -20,10 +20,17 @@ async function connectToDatabase() {
     if (!cached.promise) {
         const opts = {
             bufferCommands: false,
+            serverSelectionTimeoutMS: 5000, // 5 second timeout
         };
 
         cached.promise = mongoose.connect(MONGODB_URI as string, opts).then((mongoose) => {
             return mongoose;
+        }).catch(err => {
+            console.error("MongoDB connection error:", err.message);
+            // In build phase, we might want to allow this to fail without crashing the whole worker
+            // if we can handle the missing data in the pages.
+            cached.promise = null;
+            throw err;
         });
     }
 
@@ -31,6 +38,9 @@ async function connectToDatabase() {
         cached.conn = await cached.promise;
     } catch (e) {
         cached.promise = null;
+        // If we are in the build phase, logging the error and returning null might be safer
+        // than a total crash, though pages using it will still likely fail.
+        console.error("Failed to connect to database in connectToDatabase");
         throw e;
     }
 

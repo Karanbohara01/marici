@@ -90,7 +90,13 @@ export default function BlogAdmin() {
         setError("");
 
         const submissionData = {
-            ...formData,
+            title: formData.title,
+            slug: formData.slug,
+            excerpt: formData.excerpt,
+            content: formData.content,
+            author: formData.author,
+            coverImage: formData.coverImage,
+            isFeatured: formData.isFeatured,
             tags: typeof formData.tags === 'string'
                 ? formData.tags.split(",").map(tag => tag.trim()).filter(tag => tag !== "")
                 : formData.tags
@@ -192,7 +198,7 @@ export default function BlogAdmin() {
                                     <div className="flex gap-4 text-xs font-bold tracking-widest uppercase opacity-40">
                                         <span>BY {post.author}</span>
                                         <span>/</span>
-                                        <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
+                                        <span>{new Date(post.publishedAt || "").toLocaleDateString()}</span>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -383,4 +389,3 @@ export default function BlogAdmin() {
         </>
     );
 }
-

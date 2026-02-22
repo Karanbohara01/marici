@@ -11,10 +11,17 @@ export const metadata = {
     }
 };
 
+export const dynamic = "force-dynamic";
+
 async function getCareers() {
-    await connectToDatabase();
-    const careers = await Career.find({ status: "Open" }).sort({ createdAt: -1 });
-    return JSON.parse(JSON.stringify(careers));
+    try {
+        await connectToDatabase();
+        const careers = await Career.find({ status: "Open" }).sort({ createdAt: -1 });
+        return JSON.parse(JSON.stringify(careers));
+    } catch (error) {
+        console.error("Failed to fetch careers during build:", error);
+        return [];
+    }
 }
 
 export default async function CareersPage() {

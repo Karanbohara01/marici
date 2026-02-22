@@ -7,24 +7,32 @@ import connectToDatabase from "@/lib/mongoose";
 import { Service } from "@/models/Service";
 import { Testimonial } from "@/models/Testimonial";
 
+export const dynamic = "force-dynamic";
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export default async function Home() {
   await connectToDatabase();
 
   // Fetch data
-  const services = await Service.find().sort({ order: 1, createdAt: -1 }).limit(6).lean();
-  const testimonials = await Testimonial.find().sort({ order: 1, createdAt: -1 }).limit(3).lean();
+  let services: any[] = [];
+  let testimonials: any[] = [];
+
+  try {
+    services = await Service.find().sort({ order: 1, createdAt: -1 }).limit(6).lean();
+    testimonials = await Testimonial.find().sort({ order: 1, createdAt: -1 }).limit(3).lean();
+  } catch (error) {
+    console.error("Home page data fetch failed:", error);
+  }
 
   // Convert ObjectIds to strings for serialization
-  const serializedServices = services.map(s => ({
+  const serializedServices = (services || []).map((s: any) => ({
     ...s,
-    _id: s._id.toString()
+    _id: s._id?.toString() || ""
   }));
 
-  const serializedTestimonials = testimonials.map(t => ({
+  const serializedTestimonials = (testimonials || []).map((t: any) => ({
     ...t,
-    _id: t._id.toString()
+    _id: t._id?.toString() || ""
   }));
 
   return (

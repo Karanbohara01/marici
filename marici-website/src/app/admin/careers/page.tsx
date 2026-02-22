@@ -43,8 +43,14 @@ export default function CareersAdmin() {
         if (job) {
             setEditingJob(job);
             setFormData({
-                ...job,
-                requirements: (job as any).requirements ? (job as any).requirements.join("\n") : ""
+                title: job.title || "",
+                slug: job.slug || "",
+                department: job.department || "",
+                location: job.location || "",
+                type: job.type || "Full-time",
+                description: job.description || "",
+                requirements: Array.isArray(job.requirements) ? job.requirements.join("\n") : (job.requirements || ""),
+                status: job.status || "Open"
             });
         } else {
             setEditingJob(null);
@@ -69,7 +75,13 @@ export default function CareersAdmin() {
         setError("");
 
         const submissionData = {
-            ...formData,
+            title: formData.title,
+            slug: formData.slug,
+            department: formData.department,
+            location: formData.location,
+            type: formData.type,
+            description: formData.description,
+            status: formData.status,
             requirements: formData.requirements.split("\n").map(line => line.trim()).filter(line => line !== "")
         };
 

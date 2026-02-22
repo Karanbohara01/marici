@@ -2,29 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-export default function WhatsAppButton() {
-    const [whatsappNumber, setWhatsappNumber] = useState("");
+export default function WhatsAppButton({ phone }: { phone?: string }) {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        const fetchSettings = async () => {
-            try {
-                const res = await fetch("/api/settings");
-                const data = await res.json();
-                if (data && data.whatsappNumber) {
-                    setWhatsappNumber(data.whatsappNumber);
-                }
-            } catch (error) {
-                console.error("Failed to fetch WhatsApp number", error);
-            }
-        };
-        fetchSettings();
-
         // Show button after a small delay
         const timer = setTimeout(() => setIsVisible(true), 1500);
         return () => clearTimeout(timer);
     }, []);
 
+    const whatsappNumber = phone || "";
     if (!whatsappNumber) return null;
 
     const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}`;

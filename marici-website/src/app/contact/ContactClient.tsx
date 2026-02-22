@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, ArrowRight, Building, User, Edit3, Loader2 } from "lucide-react";
 import { useState } from "react";
 
-export default function ContactClient() {
+export default function ContactClient({ settings }: { settings: any }) {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -14,6 +14,7 @@ export default function ContactClient() {
         message: "",
     });
 
+    // ... rest of state and handlers ...
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -99,7 +100,7 @@ export default function ContactClient() {
                                 <h4 className="text-xl font-bold text-[#254796] mb-2 uppercase tracking-tighter">Kathmandu HUB</h4>
                                 <p className="text-gray-800 leading-relaxed font-medium">
                                     Marici Technology Pvt. Ltd.<br />
-                                    Digital District, Kathmandu, Nepal
+                                    {settings?.address || "Digital District, Kathmandu, Nepal"}
                                 </p>
                             </motion.div>
 
@@ -116,8 +117,8 @@ export default function ContactClient() {
                                 </div>
                                 <h4 className="text-xl font-bold text-[#254796] mb-2 uppercase tracking-tighter">Voice & Support</h4>
                                 <p className="text-gray-800 leading-relaxed font-medium">
-                                    +977 (000) 000-0000<br />
-                                    Active: 24/7 Support
+                                    {settings?.phone || "+977 (000) 000-0000"}<br />
+                                    {settings?.whatsappNumber ? `WhatsApp: ${settings.whatsappNumber}` : "Active: 24/7 Support"}
                                 </p>
                             </motion.div>
 
@@ -134,7 +135,7 @@ export default function ContactClient() {
                                 </div>
                                 <h4 className="text-xl font-bold text-[#254796] mb-2 uppercase tracking-tighter">Engineering</h4>
                                 <p className="text-gray-800 leading-relaxed font-medium">
-                                    hello@marici.tech<br />
+                                    {settings?.email || "hello@marici.tech"}<br />
                                     support@marici.tech
                                 </p>
                             </motion.div>

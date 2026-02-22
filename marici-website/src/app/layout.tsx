@@ -44,11 +44,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+import connectToDatabase from "@/lib/mongoose";
+import { SiteSettings } from "@/models/SiteSettings";
+
+export const dynamic = "force-dynamic";
+
+async function getSettings() {
+  try {
+    await connectToDatabase();
+    return await SiteSettings.findOne().lean();
+  } catch (error) {
+    console.error("Failed to fetch settings in layout:", error);
+    return null;
+  }
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings: any = await getSettings();
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://maricitechnologies.com";
+
   return (
     <html lang="en" className="scroll-smooth">
       <body
@@ -66,12 +84,12 @@ export default function RootLayout({
               "description": "Marici Technology Pvt. Ltd. provides cutting-edge IT solutions, software development, AI solutions, and digital transformation services.",
               "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "+91-9876543210",
+                "telephone": settings?.phone || "+91-9876543210",
                 "contactType": "customer service"
               },
               "sameAs": [
-                "https://www.linkedin.com/company/marici-technology",
-                "https://twitter.com/maricitech"
+                settings?.linkedinUrl || "https://www.linkedin.com/company/marici-technology",
+                settings?.twitterUrl || "https://twitter.com/maricitech"
               ]
             })
           }}
@@ -92,7 +110,7 @@ export default function RootLayout({
             })
           }}
         />
-        <ContentWrapper>{children}</ContentWrapper>
+        <ContentWrapper settings={JSON.parse(JSON.stringify(settings))}>{children}</ContentWrapper>
       </body>
     </html>
   );

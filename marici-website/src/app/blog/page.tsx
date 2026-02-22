@@ -7,10 +7,17 @@ export const metadata = {
     description: "Insights, updates, and stories from the team at Marici.",
 };
 
+export const dynamic = "force-dynamic";
+
 async function getPosts() {
-    await connectToDatabase();
-    const posts = await BlogPost.find({}).sort({ publishedAt: -1 });
-    return JSON.parse(JSON.stringify(posts));
+    try {
+        await connectToDatabase();
+        const posts = await BlogPost.find({}).sort({ publishedAt: -1 });
+        return JSON.parse(JSON.stringify(posts));
+    } catch (error) {
+        console.error("Failed to fetch blog posts during build:", error);
+        return [];
+    }
 }
 
 export default async function BlogPage() {

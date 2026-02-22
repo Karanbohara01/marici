@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Facebook, Twitter, Linkedin, Instagram, ArrowUpRight } from "lucide-react";
 
-export default function Footer() {
+export default function Footer({ settings }: { settings: any }) {
     const currentYear = new Date().getFullYear();
 
     const footerLinks = {
@@ -20,10 +20,10 @@ export default function Footer() {
             { name: "Terms of Service", href: "/terms" },
         ],
         Connect: [
-            { name: "LinkedIn", href: "#", icon: Linkedin },
-            { name: "Twitter", href: "#", icon: Twitter },
-            { name: "Instagram", href: "#", icon: Instagram },
-            { name: "Facebook", href: "#", icon: Facebook },
+            { name: "LinkedIn", href: settings?.linkedinUrl || "#", icon: Linkedin },
+            { name: "Twitter", href: settings?.twitterUrl || "#", icon: Twitter },
+            { name: "Instagram", href: settings?.instagramUrl || "#", icon: Instagram },
+            { name: "Facebook", href: settings?.facebookUrl || "#", icon: Facebook },
         ],
     };
 
