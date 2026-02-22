@@ -2,80 +2,97 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Calendar, User, Clock, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar, User, Clock, Share2, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 
 export default function BlogPostClient({ post }: { post: any }) {
     return (
-        <main className="pt-16 pb-12 bg-white">
-            <div className="container mx-auto px-6 md:px-12">
+        <main className="pt-24 pb-32 bg-slate-950 min-h-screen">
+            <div className="container mx-auto px-6 max-w-7xl">
                 <Link
                     href="/blog"
-                    className="inline-flex items-center text-[11px] font-bold tracking-[0.2em] uppercase text-gray-900 hover:gap-4 transition-all mb-12"
+                    className="inline-flex items-center text-[11px] font-bold tracking-[0.4em] uppercase text-slate-400 hover:text-blue-400 transition-all mb-16 group"
                 >
-                    <ArrowLeft className="w-4 h-4 mr-2" /> Back to Journal
+                    <ArrowLeft className="w-4 h-4 mr-4 group-hover:-translate-x-1 transition-transform" /> Back to Journal
                 </Link>
 
-                <div className="max-w-4xl mx-auto">
-                    <header className="mb-12">
-                        <div className="flex flex-wrap items-center gap-6 text-[11px] font-bold tracking-[0.2em] uppercase text-[#254796] mb-8">
-                            <span className="flex items-center gap-2"><Calendar className="w-3.5 h-3.5" /> {new Date(post.publishedAt).toLocaleDateString()}</span>
-                            <span className="text-gray-300">/</span>
-                            <span className="flex items-center gap-2"><User className="w-3.5 h-3.5" /> {post.author}</span>
-                            <span className="text-gray-300">/</span>
-                            <span className="flex items-center gap-2"><Clock className="w-3.5 h-3.5" /> 5 MIN READ</span>
+                <div className="max-w-5xl mx-auto">
+                    <header className="mb-16">
+                        <div className="flex flex-wrap items-center gap-8 text-[11px] font-bold tracking-[0.2em] uppercase text-blue-400 mb-12">
+                            <span className="flex items-center gap-2.5"><Calendar className="w-3.5 h-3.5" /> {new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-slate-800"></span>
+                            <span className="flex items-center gap-2.5"><User className="w-3.5 h-3.5" /> {post.author}</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-slate-800"></span>
+                            <span className="flex items-center gap-2.5"><Clock className="w-3.5 h-3.5" /> 5 MIN READ</span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase mb-8 leading-[0.9] text-black">
+                        <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase mb-12 leading-[0.9] text-white">
                             {post.title}
                         </h1>
-                        <p className="text-xl md:text-2xl text-gray-800 font-medium leading-relaxed max-w-4xl">
+                        <p className="text-2xl md:text-3xl text-slate-300 font-medium leading-[1.3] max-w-4xl tracking-tight">
                             {post.excerpt}
                         </p>
                     </header>
 
                     {post.coverImage && (
-                        <div className="aspect-video relative mb-12 bg-gray-50 border border-gray-100 overflow-hidden">
+                        <div className="aspect-[21/9] relative mb-20 bg-slate-900 border border-slate-800 overflow-hidden rounded-3xl">
                             <Image
                                 src={post.coverImage}
                                 alt={post.title}
                                 fill
-                                className="object-cover"
+                                className="object-cover opacity-90"
                                 priority
                             />
+                            <div className="absolute inset-0 bg-slate-950/20" />
                         </div>
                     )}
 
-                    <div className="grid grid-cols-1 lg:grid-cols-[1fr,240px] gap-12 items-start">
-                        <article className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-tighter prose-headings:text-black prose-p:text-gray-800 prose-p:font-medium prose-p:leading-relaxed prose-strong:text-black prose-blockquote:border-l-[#254796] prose-blockquote:text-gray-900 prose-blockquote:font-medium prose-blockquote:italic bg-white">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1fr,300px] gap-24 items-start">
+                        <article className="prose prose-invert prose-2xl max-w-none 
+                            prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-headings:text-white 
+                            prose-p:text-slate-300 prose-p:font-medium prose-p:leading-relaxed 
+                            prose-strong:text-white prose-blockquote:border-l-blue-500 prose-blockquote:text-slate-100 prose-blockquote:font-bold prose-blockquote:italic
+                            prose-img:rounded-3xl prose-code:text-blue-400 prose-pre:bg-slate-900/50 prose-pre:border prose-pre:border-slate-800">
                             <ReactMarkdown>{post.content}</ReactMarkdown>
                         </article>
 
-                        <aside className="sticky top-40 space-y-12 hidden lg:block border-l border-gray-50 pl-12">
+                        <aside className="sticky top-40 space-y-16 hidden lg:block border-l border-slate-900 pl-16">
                             <div>
-                                <h4 className="text-[11px] font-bold tracking-widest uppercase text-gray-900 mb-6">SHARE ANALYSIS</h4>
-                                <div className="flex flex-col gap-4">
-                                    <button className="text-[11px] font-bold tracking-widest uppercase text-gray-800 hover:text-[#254796] transition-colors text-left flex items-center gap-2">
-                                        <Share2 className="w-3.5 h-3.5" /> X / TWITTER
+                                <h4 className="text-[11px] font-bold tracking-[0.3em] uppercase text-white mb-10">SHARE ANALYSIS</h4>
+                                <div className="flex flex-col gap-6">
+                                    <button className="text-[11px] font-bold tracking-widest uppercase text-slate-400 hover:text-blue-400 transition-colors text-left flex items-center gap-3 group">
+                                        <Share2 className="w-4 h-4 opacity-50 group-hover:opacity-100" /> TWITTER / X
                                     </button>
-                                    <button className="text-[11px] font-bold tracking-widest uppercase text-gray-800 hover:text-[#254796] transition-colors text-left flex items-center gap-2">
-                                        <Share2 className="w-3.5 h-3.5" /> LINKEDIN
+                                    <button className="text-[11px] font-bold tracking-widest uppercase text-slate-400 hover:text-blue-400 transition-colors text-left flex items-center gap-3 group">
+                                        <Share2 className="w-4 h-4 opacity-50 group-hover:opacity-100" /> LINKEDIN
                                     </button>
                                 </div>
                             </div>
 
                             {post.tags && post.tags.length > 0 && (
                                 <div>
-                                    <h4 className="text-[11px] font-bold tracking-widest uppercase text-gray-900 mb-6">TAXONOMY</h4>
-                                    <div className="flex flex-wrap gap-2">
+                                    <h4 className="text-[11px] font-bold tracking-[0.3em] uppercase text-white mb-10">TAXONOMY</h4>
+                                    <div className="flex flex-wrap gap-3">
                                         {post.tags.map((tag: string) => (
-                                            <span key={tag} className="text-[11px] font-bold tracking-widest uppercase bg-gray-50 text-gray-800 px-3 py-1.5 border border-gray-100">
+                                            <span key={tag} className="text-[10px] font-bold tracking-widest uppercase bg-slate-900/50 text-slate-400 px-4 py-2 border border-slate-800 group hover:border-blue-500/30 hover:text-blue-400 transition-all cursor-default">
                                                 {tag}
                                             </span>
                                         ))}
                                     </div>
                                 </div>
                             )}
+
+                            {/* CTABox in detail page sidebar */}
+                            <div className="pt-12 border-t border-slate-900">
+                                <Link href="/contact" className="block p-8 bg-blue-600 rounded-2xl group overflow-hidden relative">
+                                    <div className="relative z-10">
+                                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70 block mb-4">Collab</span>
+                                        <h5 className="text-xl font-black text-white uppercase leading-tight mb-6 tracking-tighter">Build Your <br />Breakthrough</h5>
+                                        <ArrowRight className="w-5 h-5 text-white group-hover:translate-x-2 transition-transform" />
+                                    </div>
+                                    <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
+                                </Link>
+                            </div>
                         </aside>
                     </div>
                 </div>

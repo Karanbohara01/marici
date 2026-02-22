@@ -1,86 +1,89 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { MonitorSmartphone, Cpu, Brain, Database, ShieldCheck, Cloud, ArrowRight } from "lucide-react";
+import { MonitorSmartphone, Cpu, Brain, Database, ShieldCheck, Cloud, ArrowRight, Zap } from "lucide-react";
 import Link from "next/link";
 
 const services = [
     {
-        title: "Custom Software Development",
-        description: "End-to-end software solutions tailored to your business needs, built with modern tech stacks for scalability.",
+        title: "Custom Software",
+        description: "Bespoke digital solutions engineered for high performance and seamless scalability.",
         icon: MonitorSmartphone,
         href: "/services/software-development",
+        tag: "Core"
     },
     {
         title: "Cloud & DevOps",
-        description: "Seamless cloud migration, infrastructure optimization, and automated CI/CD pipelines to accelerate your delivery.",
+        description: "Modernizing infrastructure with automated CI/CD and resilient cloud architectures.",
         icon: Cloud,
         href: "/services/cloud-devops",
+        tag: "Infra"
     },
     {
-        title: "AI & Machine Learning",
-        description: "Intelligent AI models and data-driven insights to automate processes and unlock new business capabilities.",
+        title: "AI & Intelligence",
+        description: "Unlocking business potential with advanced machine learning and data-driven insights.",
         icon: Brain,
         href: "/services/ai",
-    },
-    {
-        title: "Data Engineering",
-        description: "Robust data pipelines and analytics platforms to help you make informed decisions across your organization.",
-        icon: Database,
-        href: "/services/data-engineering",
-    },
-    {
-        title: "Enterprise Architecture",
-        description: "Strategic technology consulting to align your IT infrastructure with your long-term business goals.",
-        icon: Cpu,
-        href: "/services/architecture",
-    },
-    {
-        title: "Cybersecurity Services",
-        description: "Comprehensive security audits, compliance, and threat protection to safeguard your digital assets.",
-        icon: ShieldCheck,
-        href: "/services/security",
+        tag: "Inno"
     },
 ];
 
 const containerVariants: Variants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
 };
 
 const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
 };
 
 export default function ServicesOverview({ initialServices }: { initialServices?: any[] }) {
-    const displayServices = initialServices && initialServices.length > 0 ? initialServices : services;
+    // Only use the first 3 services for the overview to keep it clean, unless provided otherwise
+    const displayServices = initialServices && initialServices.length > 0
+        ? initialServices.slice(0, 3)
+        : services;
 
     return (
-        <section className="py-12 bg-white relative overflow-hidden border-t border-gray-50">
+        <section className="py-24 bg-slate-950 relative overflow-hidden">
+            {/* Background Decorative Element */}
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-blue-900/10 to-transparent pointer-events-none"></div>
+
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
-                <div className="mb-8">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                    <div className="max-w-2xl">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="section-label"
+                        >
+                            <span></span>
+                            Our Expertise
+                        </motion.div>
+                        <h2 className="text-4xl md:text-6xl font-outfit font-black text-white leading-tight tracking-tight uppercase">
+                            Enterprise-Grade <br />
+                            <span className="text-gradient">Capabilities.</span>
+                        </h2>
+                    </div>
                     <motion.div
-                        initial={{ opacity: 0, y: 10 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="section-label"
                     >
-                        <span></span>
-                        Expertise
+                        <Link href="/services" className="btn-secondary group">
+                            Full Portfolio
+                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        </Link>
                     </motion.div>
-                    <h2 className="text-4xl md:text-6xl font-bold text-[#254796] leading-none tracking-tighter uppercase max-w-4xl">
-                        Precision-engineered <br />
-                        <span className="text-[#254796]">capabilities.</span>
-                    </h2>
                 </div>
 
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-50px" }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8"
                 >
                     {displayServices.map((service, index) => {
                         const iconMap: any = { MonitorSmartphone, Cpu, Brain, Database, ShieldCheck, Cloud };
@@ -92,27 +95,33 @@ export default function ServicesOverview({ initialServices }: { initialServices?
                         }
 
                         return (
-                            <motion.div key={index} variants={itemVariants}>
+                            <motion.div key={index} variants={itemVariants} className="group">
                                 <Link
                                     href={service.href || `/services/${service.slug || service._id}`}
-                                    className="group block h-full bg-white border border-gray-100 p-12 rounded-none hover:border-gray-900 transition-all duration-300 relative"
+                                    className="block h-full glass-panel p-10 hover:border-blue-500/30 transition-all duration-500 hover:-translate-y-2 group"
                                 >
                                     <div className="relative z-10 flex flex-col h-full">
-                                        <div className="w-12 h-12 flex items-center justify-center text-gray-500 mb-10 group-hover:text-[#254796] transition-colors">
-                                            <IconComponent className="w-8 h-8" strokeWidth={1} />
+                                        <div className="flex justify-between items-start mb-10">
+                                            <div className="w-14 h-14 rounded-2xl bg-slate-800/50 flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-sm border border-slate-700/50">
+                                                <IconComponent className="w-7 h-7" strokeWidth={1.5} />
+                                            </div>
+                                            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 px-3 py-1 rounded-full bg-slate-800/30 group-hover:bg-blue-600/20 group-hover:text-blue-400 transition-colors border border-slate-700/30">
+                                                {service.tag || "Solution"}
+                                            </span>
                                         </div>
 
-                                        <h3 className="text-2xl font-bold text-[#254796] mb-4 uppercase tracking-tighter group-hover:text-black transition-colors">
+                                        <h3 className="text-2xl font-outfit font-black text-white mb-4 uppercase tracking-tight group-hover:text-blue-400 transition-colors">
                                             {service.title}
                                         </h3>
 
-                                        <p className="text-gray-800 text-base mb-10 leading-relaxed flex-grow font-medium">
+                                        <p className="text-slate-400 text-base mb-10 leading-relaxed flex-grow font-medium">
                                             {service.description}
                                         </p>
 
-                                        <div className="flex items-center text-[11px] font-bold uppercase tracking-[0.2em] text-gray-800 group-hover:text-black transition-colors">
+                                        <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-slate-300 group-hover:text-blue-400 transition-all">
                                             View Solution
-                                            <span className="w-6 h-[1px] bg-gray-200 ml-4 origin-left transition-all group-hover:w-10 group-hover:bg-[#254796]"></span>
+                                            <div className="h-px flex-1 bg-slate-800 group-hover:bg-blue-400/30 transition-all"></div>
+                                            <ArrowRight className="w-4 h-4 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all" />
                                         </div>
                                     </div>
                                 </Link>
@@ -120,13 +129,6 @@ export default function ServicesOverview({ initialServices }: { initialServices?
                         )
                     })}
                 </motion.div>
-
-                <div className="mt-8 border-t border-gray-50 pt-8 flex justify-end items-center">
-                    <Link href="/services" className="inline-flex items-center gap-4 text-black font-bold uppercase tracking-widest text-[11px] group">
-                        Explore Full Stack
-                        <div className="w-12 h-[2px] bg-[#254796] group-hover:w-20 transition-all"></div>
-                    </Link>
-                </div>
             </div>
         </section>
     );

@@ -91,40 +91,40 @@ export default function AdminLayout({
 
             {/* Sidebar */}
             <div
-                className={`fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-slate-200 shadow-sm transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+                className={`fixed inset-y-0 left-0 z-50 w-80 bg-white border-r border-slate-200 shadow-premium transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
                     } lg:sticky lg:top-0 lg:h-screen lg:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col flex-shrink-0`}
             >
                 {/* Sidebar Header */}
-                <div className="h-24 flex items-center px-8 border-b border-slate-50 flex-shrink-0">
+                <div className="h-28 flex items-center px-8 border-b border-slate-50 flex-shrink-0">
                     <Link href="/" className="flex flex-col">
                         <img
                             src="/logo.png"
                             alt="Marici Technology"
-                            className="h-12 w-auto object-contain mb-1"
+                            className="h-14 w-auto object-contain mb-1.5"
                         />
-                        <div className="flex items-center gap-2">
-                            <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-blue-600 uppercase">Control Center</span>
-                            <div className="h-[1px] w-6 bg-blue-100"></div>
+                        <div className="flex items-center gap-2.5">
+                            <span className="text-[11px] font-jet-mono font-black tracking-[0.25em] text-blue-600 uppercase">Architecture</span>
+                            <div className="h-[2px] w-8 bg-blue-100/50 rounded-full"></div>
                         </div>
                     </Link>
                     <button
-                        className="lg:hidden ml-auto p-2 text-slate-400 hover:text-slate-600"
+                        className="lg:hidden ml-auto p-2.5 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-xl transition-all"
                         onClick={() => setSidebarOpen(false)}
                     >
-                        <X className="w-5 h-5" />
+                        <X className="w-6 h-6" />
                     </button>
                 </div>
 
                 {/* Navigation Links */}
-                <div className="flex-1 overflow-y-auto py-8 px-4 custom-scrollbar">
-                    <nav className="space-y-8">
+                <div className="flex-1 overflow-y-auto py-10 px-5 custom-scrollbar">
+                    <nav className="space-y-10">
                         {navGroups.map((group) => (
                             <div key={group.title}>
-                                <h3 className="px-4 text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-slate-400 mb-4 flex items-center gap-3">
+                                <h3 className="px-4 text-[11px] font-jet-mono font-black uppercase tracking-[0.4em] text-slate-400 mb-5 flex items-center gap-4">
                                     {group.title}
-                                    <div className="h-[1px] flex-1 bg-slate-100"></div>
+                                    <div className="h-px flex-1 bg-slate-100/80"></div>
                                 </h3>
-                                <div className="space-y-1">
+                                <div className="space-y-1.5">
                                     {group.items.map((item) => {
                                         const isActive = pathname === item.href;
                                         const Icon = item.icon;
@@ -132,20 +132,20 @@ export default function AdminLayout({
                                             <Link
                                                 key={item.name}
                                                 href={item.href}
-                                                className={`group relative flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-300 ${isActive
+                                                className={`group relative flex items-center px-5 py-3.5 text-sm font-bold rounded-2xl transition-all duration-300 ${isActive
                                                     ? "bg-blue-600 text-white shadow-lg shadow-blue-200"
                                                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                                                     }`}
                                             >
                                                 <Icon
-                                                    className={`mr-3 flex-shrink-0 h-5 w-5 transition-transform group-hover:scale-110 ${isActive ? "text-white" : "text-slate-400 group-hover:text-blue-500"
+                                                    className={`mr-4 flex-shrink-0 h-5 w-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? "text-white" : "text-slate-400 group-hover:text-blue-500"
                                                         }`}
                                                 />
                                                 {item.name}
                                                 {isActive && (
                                                     <motion.div
-                                                        layoutId="active-pill"
-                                                        className="absolute left-[-1rem] w-1.5 h-8 bg-blue-600 rounded-r-full"
+                                                        layoutId="active-indicator"
+                                                        className="absolute -left-1 w-2 h-10 bg-blue-600 rounded-r-2xl"
                                                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                                     />
                                                 )}
@@ -159,22 +159,22 @@ export default function AdminLayout({
                 </div>
 
                 {/* User Profile Section */}
-                <div className="p-4 border-t border-slate-100 bg-slate-50/50">
-                    <div className="flex items-center gap-3 p-3 mb-3">
-                        <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-sm shadow-md ring-2 ring-white">
+                <div className="p-5 border-t border-slate-100 bg-slate-50/40">
+                    <div className="flex items-center gap-4 p-3.5 mb-4 rounded-2xl bg-white border border-slate-200/50 shadow-sm">
+                        <div className="w-11 h-11 rounded-xl bg-linear-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-md ring-4 ring-white">
                             KB
                         </div>
                         <div className="flex-1 min-w-0">
-                            <p className="text-sm font-bold text-slate-900 truncate">Karan Bohara</p>
-                            <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest truncate">Administrator</p>
+                            <p className="text-sm font-black text-slate-900 truncate">Karan Bohara</p>
+                            <p className="text-[10px] font-jet-mono text-slate-500 uppercase tracking-widest truncate">Root Access</p>
                         </div>
                     </div>
                     <button
                         onClick={handleLogout}
-                        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-bold text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all duration-300 border border-slate-200"
+                        className="w-full flex items-center justify-center gap-2.5 px-4 py-3 text-sm font-bold text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-2xl transition-all duration-300 border border-slate-200/80 bg-white"
                     >
                         <LogOut className="h-4 w-4" />
-                        Sign Out
+                        Terminate Session
                     </button>
                 </div>
             </div>

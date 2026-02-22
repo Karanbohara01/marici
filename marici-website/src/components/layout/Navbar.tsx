@@ -25,7 +25,7 @@ export default function Navbar({ settings }: { settings: any }) {
     return (
         <header
             className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
-                ? "bg-white/95 border-b border-gray-100 py-4"
+                ? "bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/50 py-4"
                 : "bg-transparent border-b border-transparent py-6"
                 }`}
         >
@@ -35,7 +35,7 @@ export default function Navbar({ settings }: { settings: any }) {
                     <img
                         src="/logo.png"
                         alt="Marici Technology"
-                        className="h-20 w-auto object-contain"
+                        className="h-20 w-auto object-contain brightness-110"
                     />
                 </Link>
 
@@ -45,7 +45,7 @@ export default function Navbar({ settings }: { settings: any }) {
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="text-[12px] font-display font-bold uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors relative group"
+                            className="text-[12px] font-display font-bold uppercase tracking-[0.2em] text-slate-300 hover:text-blue-400 transition-colors relative group"
                         >
                             {link.name}
                         </Link>
@@ -56,7 +56,7 @@ export default function Navbar({ settings }: { settings: any }) {
                 <div className="hidden lg:flex items-center gap-8 shrink-0">
                     <Link
                         href="/contact"
-                        className="text-[12px] font-bold uppercase tracking-[0.2em] text-gray-600 hover:text-black transition-colors"
+                        className="text-[12px] font-bold uppercase tracking-[0.2em] text-slate-300 hover:text-blue-400 transition-colors"
                     >
                         Contact
                     </Link>
@@ -70,7 +70,7 @@ export default function Navbar({ settings }: { settings: any }) {
 
                 {/* Mobile Menu Toggle */}
                 <button
-                    className="lg:hidden text-black"
+                    className="lg:hidden text-white"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 >
                     {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -84,7 +84,7 @@ export default function Navbar({ settings }: { settings: any }) {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="lg:hidden absolute top-full left-0 w-full border-t border-gray-100 bg-white shadow-2xl"
+                        className="lg:hidden absolute top-full left-0 w-full border-t border-slate-800 bg-slate-950/95 backdrop-blur-2xl shadow-2xl"
                     >
                         <div className="px-6 py-10 flex flex-col gap-8">
                             {navLinks.map((link) => (
@@ -92,12 +92,12 @@ export default function Navbar({ settings }: { settings: any }) {
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="text-sm font-bold uppercase tracking-[0.3em] text-gray-900 border-b border-gray-50 pb-4"
+                                    className="text-sm font-bold uppercase tracking-[0.3em] text-slate-100 border-b border-slate-800/50 pb-4"
                                 >
                                     {link.name}
                                 </Link>
                             ))}
-                            <Link href="/contact" className="text-sm font-bold uppercase tracking-[0.3em] text-gray-600">Contact</Link>
+                            <Link href="/contact" className="text-sm font-bold uppercase tracking-[0.3em] text-slate-300">Contact</Link>
                             <Link href="/services" className="btn-primary w-full text-center">Start</Link>
                         </div>
                     </motion.div>
