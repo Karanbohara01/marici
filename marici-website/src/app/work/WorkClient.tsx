@@ -39,7 +39,7 @@ export default function WorkClient() {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-background">
-                <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
+                <Loader2 className="w-12 h-12 text-blue-00 animate-spin" />
             </div>
         );
     }
