@@ -32,7 +32,7 @@ export default function Footer({ settings }: { settings: any }) {
     };
 
     return (
-        <footer className="bg-slate-950 border-t border-slate-900 pt-20 pb-10 font-sans overflow-hidden relative">
+        <footer className="bg-slate-50 border-t border-slate-200 pt-20 pb-10 font-sans overflow-hidden relative">
             {/* Subtle gradient */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[200px] bg-blue-600/3 rounded-full blur-[120px] pointer-events-none" />
 
@@ -47,13 +47,13 @@ export default function Footer({ settings }: { settings: any }) {
                                 className="h-20 w-auto object-contain brightness-110"
                             />
                         </Link>
-                        <h3 className="text-3xl md:text-5xl font-accent font-bold text-white leading-none tracking-tighter uppercase mb-12 max-w-sm">
+                        <h3 className="text-xl md:text-2xl font-accent font-bold text-slate-900 leading-tight tracking-tight uppercase mb-8 max-w-sm">
                             Ready to build <br />
                             <span className="text-gradient">something real?</span>
                         </h3>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center gap-4 text-slate-300 font-bold uppercase tracking-[0.2em] text-[13px] group hover:text-white transition-colors"
+                            className="inline-flex items-center gap-4 text-slate-500 font-bold uppercase tracking-[0.2em] text-[13px] group hover:text-slate-900 transition-colors"
                         >
                             Get in touch
                             <div className="w-12 h-[2px] bg-blue-400 group-hover:w-20 transition-all"></div>
@@ -72,7 +72,7 @@ export default function Footer({ settings }: { settings: any }) {
                                         <li key={link.name}>
                                             <Link
                                                 href={link.href}
-                                                className="text-[13px] font-display font-bold uppercase tracking-wider text-slate-400 hover:text-white transition-colors flex items-center gap-1 group"
+                                                className="text-[13px] font-display font-bold uppercase tracking-wider text-slate-500 hover:text-slate-900 transition-colors flex items-center gap-1 group"
                                             >
                                                 {link.name}
                                                 <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
@@ -86,18 +86,18 @@ export default function Footer({ settings }: { settings: any }) {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="mt-12 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div className="font-mono text-[11px] font-bold text-slate-500 uppercase tracking-widest text-center md:text-left">
+                <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-8">
+                    <div className="font-mono text-[11px] font-bold text-slate-400 uppercase tracking-widest text-center md:text-left">
                         © {currentYear} Marici Technology Pvt. Ltd.
                     </div>
 
                     {/* Back to Top */}
                     <button
                         onClick={scrollToTop}
-                        className="group flex items-center gap-3 text-[11px] font-mono font-bold text-slate-500 uppercase tracking-widest hover:text-blue-400 transition-colors"
+                        className="group flex items-center gap-3 text-[11px] font-mono font-bold text-slate-400 uppercase tracking-widest hover:text-blue-600 transition-colors"
                     >
                         Back to top
-                        <div className="w-10 h-10 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center justify-center group-hover:bg-blue-600/10 group-hover:border-blue-500/30 group-hover:-translate-y-1 transition-all duration-300">
+                        <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center group-hover:bg-blue-50 group-hover:border-blue-300 group-hover:-translate-y-1 transition-all duration-300">
                             <ArrowUp className="w-4 h-4" />
                         </div>
                     </button>

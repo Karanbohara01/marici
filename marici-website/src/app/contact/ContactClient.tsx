@@ -49,9 +49,9 @@ export default function ContactClient({ settings }: { settings: any }) {
     };
 
     return (
-        <div className="min-h-screen bg-slate-950 pt-20">
+        <div className="min-h-screen bg-background">
             {/* Header Section */}
-            <section className="relative py-20 overflow-hidden bg-slate-950 border-b border-slate-900">
+            <section className="relative pt-28 pb-12 overflow-hidden bg-background border-b border-slate-200">
                 <div className="container mx-auto px-6 relative z-10 max-w-7xl text-center">
                     <div className="max-w-4xl mx-auto">
                         <motion.div
@@ -67,7 +67,7 @@ export default function ContactClient({ settings }: { settings: any }) {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-6xl md:text-8xl font-black mb-10 leading-[0.9] text-white tracking-tighter uppercase"
+                            className="mb-8 text-foreground tracking-tighter uppercase leading-[0.95]"
                         >
                             Let's start <br /><span className="text-gradient">something</span> big.
                         </motion.h1>
@@ -75,7 +75,7 @@ export default function ContactClient({ settings }: { settings: any }) {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="text-2xl text-slate-300 leading-relaxed max-w-2xl mx-auto font-medium"
+                            className="text-slate-500 leading-relaxed max-w-2xl mx-auto font-medium"
                         >
                             Whether you're looking for a technical audit or a full-scale digital transformation, our engineering team is ready to help.
                         </motion.p>
@@ -100,8 +100,8 @@ export default function ContactClient({ settings }: { settings: any }) {
                                     <div className="w-2 h-2 rounded-full bg-blue-500"></div>
                                     Location
                                 </div>
-                                <h4 className="text-2xl font-black text-white mb-4 uppercase tracking-tight">Kathmandu HUB</h4>
-                                <p className="text-slate-400 leading-relaxed font-medium text-lg">
+                                <h4 className="text-base font-bold text-foreground mb-3 uppercase tracking-tight">Kathmandu HUB</h4>
+                                <p className="text-slate-500 leading-relaxed font-medium text-sm">
                                     Marici Technology Pvt. Ltd.<br />
                                     {settings?.address || "Digital District, Kathmandu, Nepal"}
                                 </p>
@@ -118,8 +118,8 @@ export default function ContactClient({ settings }: { settings: any }) {
                                     <div className="w-2 h-2 rounded-full bg-blue-500"></div>
                                     Direct Connect
                                 </div>
-                                <h4 className="text-2xl font-black text-white mb-4 uppercase tracking-tight">Voice & Support</h4>
-                                <p className="text-slate-400 leading-relaxed font-medium text-lg">
+                                <h4 className="text-base font-bold text-foreground mb-3 uppercase tracking-tight">Voice & Support</h4>
+                                <p className="text-slate-500 leading-relaxed font-medium text-sm">
                                     {settings?.phone || "+977 (000) 000-0000"}<br />
                                     {settings?.whatsappNumber ? `WhatsApp: ${settings.whatsappNumber}` : "Active: 24/7 Support"}
                                 </p>
@@ -136,8 +136,8 @@ export default function ContactClient({ settings }: { settings: any }) {
                                     <div className="w-2 h-2 rounded-full bg-blue-500"></div>
                                     Email
                                 </div>
-                                <h4 className="text-2xl font-black text-white mb-4 uppercase tracking-tight">Engineering</h4>
-                                <p className="text-slate-400 leading-relaxed font-medium text-lg">
+                                <h4 className="text-base font-bold text-foreground mb-3 uppercase tracking-tight">Engineering</h4>
+                                <p className="text-slate-500 leading-relaxed font-medium text-sm">
                                     {settings?.email || "hello@marici.tech"}<br />
                                     support@marici.tech
                                 </p>
@@ -145,7 +145,7 @@ export default function ContactClient({ settings }: { settings: any }) {
                         </div>
 
                         <div className="p-12 glass-panel relative overflow-hidden group">
-                            <p className="text-slate-300 text-lg italic leading-relaxed mb-8 font-medium relative z-10">
+                            <p className="text-slate-600 text-lg italic leading-relaxed mb-8 font-medium relative z-10">
                                 "The level of technical expertise Marici brings is unmatched in the region. They didn't just build an app; they built our future."
                             </p>
                             <p className="text-blue-400 font-bold uppercase tracking-[0.2em] text-[11px] relative z-10">— CTO, Vertex Innovations</p>
@@ -161,8 +161,8 @@ export default function ContactClient({ settings }: { settings: any }) {
                                 <div className="w-24 h-24 bg-blue-500/10 text-blue-500 border border-blue-500/20 rounded-full flex items-center justify-center mb-10">
                                     <CheckCircle2 className="w-12 h-12" />
                                 </div>
-                                <h3 className="text-5xl font-black text-white mb-8 uppercase tracking-tighter">Inquiry Received.</h3>
-                                <p className="text-slate-300 text-xl mb-12 max-w-sm leading-relaxed font-medium">
+                                <h3 className="text-foreground mb-6 uppercase tracking-tighter">Inquiry Received.</h3>
+                                <p className="text-slate-500 mb-10 max-w-sm leading-relaxed font-medium">
                                     Our specialists will review your requirements and reach out within 24 hours.
                                 </p>
                                 <button
@@ -197,7 +197,7 @@ export default function ContactClient({ settings }: { settings: any }) {
                                             required
                                             value={formData.name}
                                             onChange={handleChange}
-                                            className="w-full px-0 py-5 bg-transparent border-b border-slate-800 focus:border-blue-500 outline-none transition-all text-white text-xl font-medium placeholder:text-slate-800"
+                                            className="w-full px-0 py-4 bg-transparent border-b border-slate-300 focus:border-blue-500 outline-none transition-all text-foreground text-sm font-medium placeholder:text-slate-300"
                                             placeholder="John Doe"
                                         />
                                     </div>
@@ -211,7 +211,7 @@ export default function ContactClient({ settings }: { settings: any }) {
                                             required
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className="w-full px-0 py-5 bg-transparent border-b border-slate-800 focus:border-blue-500 outline-none transition-all text-white text-xl font-medium placeholder:text-slate-800"
+                                            className="w-full px-0 py-4 bg-transparent border-b border-slate-300 focus:border-blue-500 outline-none transition-all text-foreground text-sm font-medium placeholder:text-slate-300"
                                             placeholder="john@marici.tech"
                                         />
                                     </div>
@@ -226,7 +226,7 @@ export default function ContactClient({ settings }: { settings: any }) {
                                             name="company"
                                             value={formData.company}
                                             onChange={handleChange}
-                                            className="w-full px-0 py-5 bg-transparent border-b border-slate-800 focus:border-blue-500 outline-none transition-all text-white text-xl font-medium placeholder:text-slate-800"
+                                            className="w-full px-0 py-4 bg-transparent border-b border-slate-300 focus:border-blue-500 outline-none transition-all text-foreground text-sm font-medium placeholder:text-slate-300"
                                             placeholder="Enterprise Inc."
                                         />
                                     </div>
@@ -239,7 +239,7 @@ export default function ContactClient({ settings }: { settings: any }) {
                                             name="phone"
                                             value={formData.phone}
                                             onChange={handleChange}
-                                            className="w-full px-0 py-5 bg-transparent border-b border-slate-800 focus:border-blue-500 outline-none transition-all text-white text-xl font-medium placeholder:text-slate-800"
+                                            className="w-full px-0 py-4 bg-transparent border-b border-slate-300 focus:border-blue-500 outline-none transition-all text-foreground text-sm font-medium placeholder:text-slate-300"
                                             placeholder="+977"
                                         />
                                     </div>
@@ -252,7 +252,7 @@ export default function ContactClient({ settings }: { settings: any }) {
                                         name="service"
                                         value={formData.service}
                                         onChange={handleChange}
-                                        className="w-full px-0 py-5 bg-transparent border-b border-slate-800 focus:border-blue-500 outline-none transition-all text-white text-xl font-medium appearance-none cursor-pointer"
+                                        className="w-full px-0 py-4 bg-transparent border-b border-slate-300 focus:border-blue-500 outline-none transition-all text-foreground text-sm font-medium appearance-none cursor-pointer"
                                     >
                                         <option className="bg-slate-900">Web & Mobile Engineering</option>
                                         <option className="bg-slate-900">AI & Machine Learning</option>
@@ -273,7 +273,7 @@ export default function ContactClient({ settings }: { settings: any }) {
                                         rows={4}
                                         value={formData.message}
                                         onChange={handleChange}
-                                        className="w-full px-0 py-5 bg-transparent border-b border-slate-800 focus:border-blue-500 outline-none transition-all text-white text-xl font-medium resize-none placeholder:text-slate-800"
+                                        className="w-full px-0 py-4 bg-transparent border-b border-slate-300 focus:border-blue-500 outline-none transition-all text-foreground text-sm font-medium resize-none placeholder:text-slate-300"
                                         placeholder="Outline your vision..."
                                     />
                                 </div>
@@ -282,7 +282,7 @@ export default function ContactClient({ settings }: { settings: any }) {
                                     <button
                                         type="submit"
                                         disabled={status === "loading"}
-                                        className="btn-primary w-full h-18 flex items-center justify-center gap-6 text-xl group"
+                                        className="btn-primary w-full flex items-center justify-center gap-3 group"
                                     >
                                         {status === "loading" ? (
                                             <Loader2 className="w-6 h-6 animate-spin" />

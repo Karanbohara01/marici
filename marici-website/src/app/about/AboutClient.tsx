@@ -29,9 +29,9 @@ const values = [
 
 export default function AboutClient({ team }: { team: any[] }) {
     return (
-        <div className="min-h-screen bg-slate-950 pt-20">
+        <div className="min-h-screen bg-background">
             {/* Story Section */}
-            <section className="relative py-20 overflow-hidden bg-slate-950 border-b border-slate-900">
+            <section className="relative pt-28 pb-12 overflow-hidden bg-background border-b border-slate-200">
                 <div className="container mx-auto px-6 relative z-10 max-w-7xl">
                     <div className="max-w-4xl">
                         <motion.div
@@ -46,15 +46,15 @@ export default function AboutClient({ team }: { team: any[] }) {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-6xl md:text-8xl font-bold mb-10 leading-none text-white tracking-tighter uppercase"
+                            className="mb-8 text-foreground tracking-tighter uppercase"
                         >
-                            Engineering for <br /><span className="text-gradient">ambition</span>.
+                            Engineering for <br /><span className="text-gradient">ambition</span>
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="text-2xl text-slate-300 leading-relaxed max-w-3xl font-medium"
+                            className="text-slate-400 max-w-3xl font-normal"
                         >
                             Marici Technology was founded on a singular premise: that enterprise-grade software should be as beautiful as it is powerful. We bridge the gap between complex engineering and human-centric design.
                         </motion.p>
@@ -63,7 +63,7 @@ export default function AboutClient({ team }: { team: any[] }) {
             </section>
 
             {/* Our Values */}
-            <section className="py-24 bg-slate-950 relative overflow-hidden border-b border-slate-900">
+            <section className="py-24 bg-slate-50 relative overflow-hidden border-b border-slate-200">
                 <div className="container mx-auto px-6 max-w-7xl relative z-10">
                     <div className="mb-16">
                         <motion.div
@@ -75,10 +75,10 @@ export default function AboutClient({ team }: { team: any[] }) {
                             <span className="w-8 h-[1px] bg-blue-400"></span>
                             <span className="text-xs font-bold uppercase tracking-widest text-blue-400">Principles</span>
                         </motion.div>
-                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tighter uppercase">Code of Conduct<span className="text-blue-400">.</span></h2>
+                        <h2 className="text-foreground mb-6 tracking-tighter uppercase">Code of Conduct<span className="text-blue-600">.</span></h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-slate-900">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-slate-200">
                         {values.map((value, index) => (
                             <motion.div
                                 key={index}
@@ -86,15 +86,15 @@ export default function AboutClient({ team }: { team: any[] }) {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className={`p-12 transition-all hover:bg-slate-900/40 group bg-slate-950 ${index !== values.length - 1 ? "lg:border-r border-slate-900" : ""}`}
+                                className={`p-12 transition-all hover:bg-blue-50 group bg-background ${index !== values.length - 1 ? "lg:border-r border-slate-200" : ""}`}
                             >
-                                <div className="w-14 h-14 rounded-2xl bg-slate-800/50 flex items-center justify-center text-slate-400 mb-10 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-sm border border-slate-700/50">
+                                <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-500 mb-10 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-sm border border-slate-200">
                                     <value.icon className="w-7 h-7" strokeWidth={1} />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-tighter group-hover:text-blue-400 transition-colors">
+                                <h3 className="text-xl font-bold text-foreground mb-4 uppercase tracking-tighter group-hover:text-blue-600 transition-colors">
                                     {value.title}
                                 </h3>
-                                <p className="text-slate-400 text-base leading-relaxed font-medium">
+                                <p className="text-slate-500 text-base leading-relaxed font-medium">
                                     {value.description}
                                 </p>
                             </motion.div>
@@ -104,7 +104,7 @@ export default function AboutClient({ team }: { team: any[] }) {
             </section>
 
             {/* Leadership Team */}
-            <section className="py-32 bg-slate-950 relative overflow-hidden">
+            <section className="py-32 bg-background relative overflow-hidden">
                 {/* Section Depth Glow */}
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -120,7 +120,7 @@ export default function AboutClient({ team }: { team: any[] }) {
                                 <span></span>
                                 Leadership
                             </motion.div>
-                            <h2 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tighter uppercase leading-[0.9]">
+                            <h2 className="text-foreground mb-6 tracking-tighter uppercase leading-[0.9]">
                                 Executive <br />
                                 <span className="text-gradient">Council.</span>
                             </h2>
@@ -129,13 +129,13 @@ export default function AboutClient({ team }: { team: any[] }) {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="text-slate-400 text-lg max-w-md font-medium leading-relaxed pb-2"
+                            className="text-slate-400 max-w-md font-medium pb-2"
                         >
                             Our leadership team brings decades of combined experience in engineering, design, and strategic operations.
                         </motion.p>
                     </div>
 
-                    <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 ${team.length <= 2 ? 'lg:justify-center' : ''}`}>
+                    <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ${team.length <= 2 ? 'lg:justify-center' : ''}`}>
                         {team.length > 0 ? team.map((member, index) => (
                             <motion.div
                                 key={index}
@@ -145,49 +145,48 @@ export default function AboutClient({ team }: { team: any[] }) {
                                 transition={{ delay: index * 0.1, duration: 0.6 }}
                                 className="group relative"
                             >
-                                <div className="glass-panel p-6 pb-12 h-full flex flex-col hover:border-blue-500/40 transition-all duration-500 hover:-translate-y-2">
-                                    <div className="relative overflow-hidden aspect-[4/5] mb-10 rounded-2xl border border-slate-800/50 bg-slate-950">
+                                <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col hover:border-blue-200 transition-all duration-300">
+                                    <div className="relative overflow-hidden aspect-square mb-5 rounded-xl border border-slate-100 bg-slate-100">
                                         <Image
                                             src={member.imageUrl || "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop"}
                                             alt={member.name}
                                             fill
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                                            className="object-cover grayscale group-hover:grayscale-0 scale-100 group-hover:scale-110 transition-all duration-1000 opacity-80 group-hover:opacity-100"
+                                            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                                         />
-                                        <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                                     </div>
 
                                     <div className="flex-grow">
-                                        <div className="text-[10px] text-blue-400 font-jet-mono font-black mb-4 uppercase tracking-[0.3em] flex items-center gap-3">
-                                            <span className="w-6 h-[1px] bg-blue-500/40"></span>
+                                        <div className="text-[10px] text-blue-800 font-jet-mono font-bold mb-2 uppercase tracking-widest flex items-center gap-2">
+                                            <span className="w-5 h-[1px] bg-blue-800/40"></span>
                                             {member.role}
                                         </div>
-                                        <h3 className="text-3xl font-black text-white mb-6 uppercase tracking-tighter leading-none group-hover:text-blue-400 transition-colors">
+                                        <h3 className="text-foreground text-base font-bold mb-2 uppercase tracking-tight">
                                             {member.name}
                                         </h3>
                                         {member.bio && (
-                                            <p className="text-slate-400 text-sm leading-relaxed mb-8 font-medium line-clamp-3 group-hover:text-slate-300 transition-colors">
+                                            <p className="text-slate-500 text-xs leading-relaxed mb-4 font-medium line-clamp-2">
                                                 {member.bio}
                                             </p>
                                         )}
                                     </div>
 
-                                    <div className="flex items-center gap-6 pt-6 border-t border-slate-800/50">
+                                    <div className="flex items-center gap-4 pt-4 border-t border-slate-100">
                                         {member.socialLinks?.linkedin && (
-                                            <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-400 transition-colors">
-                                                <Linkedin className="w-5 h-5" strokeWidth={1.5} />
+                                            <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-800 transition-colors">
+                                                <Linkedin className="w-4 h-4" strokeWidth={1.5} />
                                             </a>
                                         )}
                                         {member.socialLinks?.twitter && (
-                                            <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-400 transition-colors">
-                                                <Twitter className="w-5 h-5" strokeWidth={1.5} />
+                                            <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-800 transition-colors">
+                                                <Twitter className="w-4 h-4" strokeWidth={1.5} />
                                             </a>
                                         )}
                                     </div>
                                 </div>
                             </motion.div>
                         )) : (
-                            <div className="col-span-full text-center py-24 text-slate-600 uppercase text-xs font-jet-mono font-black tracking-[0.4em] bg-slate-900/10 rounded-3xl border border-dashed border-slate-800">
+                            <div className="col-span-full text-center py-24 text-slate-400 uppercase text-xs font-jet-mono font-black tracking-[0.4em] bg-slate-50 rounded-3xl border border-dashed border-slate-200">
                                 COUNCIL STATUS: PENDING ARCHITECTURE
                             </div>
                         )}

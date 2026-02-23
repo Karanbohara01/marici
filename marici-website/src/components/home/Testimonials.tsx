@@ -26,12 +26,12 @@ export default function Testimonials({ initialTestimonials }: { initialTestimoni
     const displayTestimonials = initialTestimonials && initialTestimonials.length > 0 ? initialTestimonials : fallbackTestimonials;
 
     return (
-        <section className="py-32 bg-slate-950 relative overflow-hidden">
+        <section className="py-20 bg-slate-50 relative overflow-hidden">
             {/* Background Glow */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-600/3 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8">
                     <div className="max-w-2xl">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
@@ -42,7 +42,7 @@ export default function Testimonials({ initialTestimonials }: { initialTestimoni
                             <span></span>
                             Our Impact
                         </motion.div>
-                        <h2 className="text-5xl md:text-7xl font-outfit font-black text-white leading-[0.9] tracking-tight uppercase">
+                        <h2 className="font-display font-black text-foreground leading-[0.9] tracking-tight uppercase">
                             Global Trust. <br />
                             <span className="text-gradient">Real Results.</span>
                         </h2>
@@ -51,7 +51,7 @@ export default function Testimonials({ initialTestimonials }: { initialTestimoni
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-slate-400 text-lg max-w-md font-medium leading-relaxed pb-2"
+                        className="text-slate-500 max-w-md font-medium pb-2"
                     >
                         Hear from the leaders and innovators we&apos;ve partnered with to deliver transformative results.
                     </motion.p>
@@ -80,13 +80,13 @@ export default function Testimonials({ initialTestimonials }: { initialTestimoni
                                     ))}
                                 </div>
 
-                                <p className="text-lg text-slate-300 mb-10 leading-relaxed font-medium flex-grow">
+                                <p className="text-slate-600 mb-10 font-medium flex-grow">
                                     &ldquo;{quote.substring(0, 200)}{quote.length > 200 ? "..." : ""}&rdquo;
                                 </p>
 
-                                <div className="flex items-center gap-4 pt-8 border-t border-slate-800/50">
+                                <div className="flex items-center gap-4 pt-8 border-t border-slate-200">
                                     {avatarUrl ? (
-                                        <div className="w-12 h-12 rounded-xl overflow-hidden border border-slate-700/50 relative shrink-0">
+                                        <div className="w-12 h-12 rounded-xl overflow-hidden border border-slate-200 relative shrink-0">
                                             <Image
                                                 src={avatarUrl}
                                                 alt={authorName}
@@ -96,13 +96,13 @@ export default function Testimonials({ initialTestimonials }: { initialTestimoni
                                             />
                                         </div>
                                     ) : (
-                                        <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center font-bold text-sm text-slate-100 uppercase shadow-xs group-hover:bg-blue-600/20 group-hover:text-blue-400 transition-all duration-500 border border-slate-700/50 shrink-0">
+                                        <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center font-bold text-sm text-slate-600 uppercase shadow-xs group-hover:bg-blue-100 group-hover:text-blue-600 transition-all duration-500 border border-slate-200 shrink-0">
                                             {firstChar}
                                         </div>
                                     )}
                                     <div>
-                                        <div className="font-outfit font-black text-white uppercase tracking-tight">{authorName}</div>
-                                        <div className="text-[10px] font-jet-mono font-black text-slate-500 uppercase tracking-[0.2em] mt-1">{item.role || "Executive"}</div>
+                                        <div className="font-display font-black text-foreground uppercase tracking-tight">{authorName}</div>
+                                        <div className="text-[10px] font-jet-mono font-black text-slate-400 uppercase tracking-[0.2em] mt-1">{item.role || "Executive"}</div>
                                     </div>
                                 </div>
                             </motion.div>

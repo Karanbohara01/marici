@@ -27,8 +27,6 @@ async function connectToDatabase() {
             return mongoose;
         }).catch(err => {
             console.error("MongoDB connection error:", err.message);
-            // In build phase, we might want to allow this to fail without crashing the whole worker
-            // if we can handle the missing data in the pages.
             cached.promise = null;
             throw err;
         });

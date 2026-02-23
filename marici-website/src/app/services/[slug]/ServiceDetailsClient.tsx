@@ -10,13 +10,13 @@ export default function ServiceDetailsClient({ service }: { service: any }) {
     const Icon = (LucideIcons as any)[service.icon] || LucideIcons.MonitorSmartphone;
 
     return (
-        <div className="min-h-screen bg-slate-950">
+        <div className="min-h-screen bg-background">
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 overflow-hidden border-b border-slate-900 bg-slate-950">
+            <section className="relative pt-32 pb-20 overflow-hidden border-b border-slate-200 bg-background">
                 <div className="container mx-auto px-6 max-w-7xl relative z-10">
                     <Link
                         href="/services"
-                        className="inline-flex items-center text-slate-400 hover:text-blue-400 transition-colors mb-12 group"
+                        className="inline-flex items-center text-slate-400 hover:text-blue-600 transition-colors mb-12 group"
                     >
                         <ArrowLeft className="w-5 h-5 mr-4 group-hover:-translate-x-1 transition-transform" />
                         <span className="text-[11px] font-bold uppercase tracking-[0.2em]">Back to Solutions</span>
@@ -26,7 +26,7 @@ export default function ServiceDetailsClient({ service }: { service: any }) {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-20 h-20 bg-slate-900/80 backdrop-blur-xl rounded-3xl flex items-center justify-center text-blue-400 mb-12 shadow-2xl border border-slate-800"
+                            className="w-20 h-20 bg-slate-100 backdrop-blur-xl rounded-3xl flex items-center justify-center text-blue-600 mb-12 shadow-2xl border border-slate-200"
                         >
                             <Icon className="w-10 h-10" strokeWidth={1} />
                         </motion.div>
@@ -35,7 +35,7 @@ export default function ServiceDetailsClient({ service }: { service: any }) {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-6xl md:text-8xl font-black mb-10 tracking-tighter text-white uppercase leading-[0.9]"
+                            className="text-6xl md:text-8xl font-black mb-10 tracking-tighter text-foreground uppercase leading-[0.9]"
                         >
                             {service.title}
                         </motion.h1>
@@ -44,7 +44,7 @@ export default function ServiceDetailsClient({ service }: { service: any }) {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="text-xl md:text-2xl text-slate-300 leading-relaxed font-medium max-w-3xl"
+                            className="text-xl md:text-2xl text-slate-500 leading-relaxed font-medium max-w-3xl"
                         >
                             {service.description}
                         </motion.p>
@@ -76,10 +76,10 @@ export default function ServiceDetailsClient({ service }: { service: any }) {
                                 ).map((item: any, i: number) => (
                                     <div key={i} className="glass-panel p-12 group hover:border-blue-500/30 transition-all duration-500">
                                         <CheckCircle2 className="w-8 h-8 text-blue-500 mb-8" />
-                                        <h4 className="text-2xl font-bold text-white mb-6 uppercase tracking-tight">
+                                        <h4 className="text-2xl font-bold text-foreground mb-6 uppercase tracking-tight">
                                             {item.title || `Enterprise Standard ${i + 1}`}
                                         </h4>
-                                        <p className="text-slate-400 leading-relaxed font-medium">
+                                        <p className="text-slate-500 leading-relaxed font-medium">
                                             {item.description || "We deliver high-availability systems engineered for institutional scale and rigorous performance requirements."}
                                         </p>
                                     </div>
@@ -90,10 +90,10 @@ export default function ServiceDetailsClient({ service }: { service: any }) {
 
                     <div className="lg:col-span-4">
                         <div className="sticky top-40">
-                            <div className="bg-slate-900/60 backdrop-blur-xl p-12 border border-slate-800 rounded-3xl relative overflow-hidden group">
+                            <div className="bg-white border border-slate-200 p-12 rounded-3xl relative overflow-hidden group shadow-sm">
                                 <div className="relative z-10">
-                                    <h3 className="text-4xl font-black text-white mb-8 uppercase tracking-tight leading-[0.9]">Ready to <br /><span className="text-blue-400">Transform?</span></h3>
-                                    <p className="text-slate-400 mb-12 text-lg leading-relaxed font-medium">
+                                    <h3 className="text-4xl font-black text-foreground mb-8 uppercase tracking-tight leading-[0.9]">Ready to <br /><span className="text-blue-600">Transform?</span></h3>
+                                    <p className="text-slate-500 mb-12 text-lg leading-relaxed font-medium">
                                         Consult with our engineering leads to architect your next digital leap.
                                     </p>
                                     <Link

@@ -45,12 +45,12 @@ export default function ServicesOverview({ initialServices }: { initialServices?
         : services;
 
     return (
-        <section className="py-24 bg-slate-950 relative overflow-hidden">
+        <section className="py-16 bg-background relative overflow-hidden">
             {/* Background Decorative Element */}
             <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-blue-900/10 to-transparent pointer-events-none"></div>
 
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-8">
                     <div className="max-w-2xl">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
@@ -61,9 +61,9 @@ export default function ServicesOverview({ initialServices }: { initialServices?
                             <span></span>
                             Our Expertise
                         </motion.div>
-                        <h2 className="text-4xl md:text-6xl font-outfit font-black text-white leading-tight tracking-tight uppercase">
+                        <h2 className="text-foreground leading-tight tracking-tight uppercase">
                             Enterprise-Grade <br />
-                            <span className="text-gradient">Capabilities.</span>
+                            <span className="text-gradient">Capabilities</span>
                         </h2>
                     </div>
                     <motion.div
@@ -102,25 +102,25 @@ export default function ServicesOverview({ initialServices }: { initialServices?
                                 >
                                     <div className="relative z-10 flex flex-col h-full">
                                         <div className="flex justify-between items-start mb-10">
-                                            <div className="w-14 h-14 rounded-2xl bg-slate-800/50 flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-sm border border-slate-700/50">
+                                            <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-500 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-sm border border-slate-200">
                                                 <IconComponent className="w-7 h-7" strokeWidth={1.5} />
                                             </div>
-                                            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 px-3 py-1 rounded-full bg-slate-800/30 group-hover:bg-blue-600/20 group-hover:text-blue-400 transition-colors border border-slate-700/30">
+                                            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 px-3 py-1 rounded-full bg-slate-100 group-hover:bg-blue-600/10 group-hover:text-blue-600 transition-colors border border-slate-200">
                                                 {service.tag || "Solution"}
                                             </span>
                                         </div>
 
-                                        <h3 className="text-2xl font-outfit font-black text-white mb-4 uppercase tracking-tight group-hover:text-blue-400 transition-colors">
+                                        <h3 className="font-display font-black text-foreground mb-4 uppercase tracking-tight group-hover:text-blue-600 transition-colors">
                                             {service.title}
                                         </h3>
 
-                                        <p className="text-slate-400 text-base mb-10 leading-relaxed flex-grow font-medium">
+                                        <p className="text-slate-500 text-base mb-10 leading-relaxed flex-grow font-medium">
                                             {service.description}
                                         </p>
 
-                                        <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-slate-300 group-hover:text-blue-400 transition-all">
+                                        <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-slate-400 group-hover:text-blue-600 transition-all">
                                             View Solution
-                                            <div className="h-px flex-1 bg-slate-800 group-hover:bg-blue-400/30 transition-all"></div>
+                                            <div className="h-px flex-1 bg-slate-200 group-hover:bg-blue-400/30 transition-all"></div>
                                             <ArrowRight className="w-4 h-4 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all" />
                                         </div>
                                     </div>

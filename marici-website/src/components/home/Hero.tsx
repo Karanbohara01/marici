@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Sparkles, ChevronLeft, ChevronRight, Mouse } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
 interface Slide {
@@ -72,7 +72,7 @@ export default function Hero({ initialSlides }: { initialSlides?: Slide[] }) {
     };
 
     return (
-        <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-900 pt-20">
+        <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
             {/* Carousel Background Images */}
             <AnimatePresence initial={false} custom={direction}>
                 <motion.div
@@ -95,39 +95,17 @@ export default function Hero({ initialSlides }: { initialSlides?: Slide[] }) {
                             style={{ backgroundImage: `url(${slides[current].imageUrl})` }}
                         />
                     ) : (
-                        <div className="absolute inset-0 bg-slate-900" />
+                        <div className="absolute inset-0 bg-background" />
                     )}
-                    <div className="absolute inset-0 bg-linear-to-b from-slate-900/60 via-slate-900/20 to-slate-900/60" />
+                    <div className="absolute inset-0 bg-linear-to-b from-background/30 via-background/10 to-background/40" />
                 </motion.div>
             </AnimatePresence>
 
-            {/* Mesh Gradients Overlay */}
+            {/* Mesh Gradients Overlay - Simplified for speed */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
-                <motion.div
-                    className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/20 rounded-full blur-[120px]"
-                    animate={{
-                        x: [0, 50, 0],
-                        y: [0, 30, 0],
-                    }}
-                    transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "linear"
-                    }}
-                />
-                <motion.div
-                    className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-500/20 rounded-full blur-[150px]"
-                    animate={{
-                        x: [0, -70, 0],
-                        y: [0, -40, 0],
-                    }}
-                    transition={{
-                        duration: 25,
-                        repeat: Infinity,
-                        ease: "linear"
-                    }}
-                />
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.05] mix-blend-overlay"></div>
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[120px]" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-500/10 rounded-full blur-[150px]" />
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] mix-blend-overlay"></div>
             </div>
 
             <div className="container mx-auto px-6 relative z-20 max-w-7xl">
@@ -150,25 +128,24 @@ export default function Hero({ initialSlides }: { initialSlides?: Slide[] }) {
 
 
                             <div className="max-w-4xl text-center">
-                                <h1 className="text-6xl md:text-8xl font-outfit font-black tracking-tight text-white mb-8 leading-[0.95]">
+                                <h1 className="text-foreground mb-8">
                                     {slides[current].title.split(" ").map((word, i) => (
-                                        <span key={i} className={word.toLowerCase() === "digital" || word.toLowerCase() === "ai" ? "text-gradient bg-linear-to-br from-blue-400 via-indigo-400 to-violet-400" : ""}>
+                                        <span key={i} className={word.toLowerCase() === "digital" || word.toLowerCase() === "ai" ? "text-gradient" : ""}>
                                             {word}{" "}
                                         </span>
                                     ))}
                                     <span className="text-blue-500">.</span>
                                 </h1>
 
-                                <p className="text-lg md:text-xl text-slate-300 mb-12 leading-relaxed max-w-2xl mx-auto font-medium">
+                                <p className="text-slate-600 mb-8 max-w-2xl mx-auto font-normal">
                                     {slides[current].subtitle}
                                 </p>
 
                                 <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                                     <Link href={slides[current].ctaLink || "#"} className="btn-primary group !bg-blue-600 hover:!bg-blue-500 border-none shadow-blue-900/40">
                                         {slides[current].ctaText}
-                                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                                     </Link>
-                                    <Link href="/work" className="btn-secondary !bg-white/10 !text-white !border-white/20 hover:!bg-white/20 backdrop-blur-md">
+                                    <Link href="/work" className="btn-secondary text-base px-10 py-4">
                                         Explore Solutions
                                     </Link>
                                 </div>
@@ -209,10 +186,9 @@ export default function Hero({ initialSlides }: { initialSlides?: Slide[] }) {
                 ))}
             </div>
 
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3 scroll-indicator">
-                <Mouse className="w-5 h-5 text-slate-500" strokeWidth={1.5} />
-                <div className="w-[1px] h-8 bg-gradient-to-b from-slate-500 to-transparent"></div>
+            {/* Scroll Indicator - Simplified */}
+            <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3 scroll-indicator opacity-50">
+                <div className="w-[1px] h-12 bg-gradient-to-b from-blue-500 to-transparent"></div>
             </div>
         </section>
     );

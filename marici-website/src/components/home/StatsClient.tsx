@@ -55,7 +55,7 @@ function AnimatedNumber({ value, suffix = "" }: { value: string; suffix?: string
 
 export default function StatsClient({ stats }: { stats: { value: string; label: string }[] }) {
     return (
-        <section className="py-28 bg-slate-950 border-y border-slate-900 relative overflow-hidden">
+        <section className="py-16 bg-background border-y border-slate-200 relative overflow-hidden">
             {/* Subtle Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[200px] bg-blue-600/3 rounded-full blur-[100px] pointer-events-none" />
 
@@ -68,13 +68,13 @@ export default function StatsClient({ stats }: { stats: { value: string; label: 
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1, duration: 0.5 }}
-                            className={`flex flex-col items-center lg:items-start text-center lg:text-left px-8 group cursor-default ${index !== stats.length - 1 ? "lg:border-r border-slate-900" : ""
+                            className={`flex flex-col items-center lg:items-start text-center lg:text-left px-8 group cursor-default ${index !== stats.length - 1 ? "lg:border-r border-slate-200" : ""
                                 }`}
                         >
                             <div className="text-[11px] font-jet-mono font-black uppercase tracking-[0.3em] text-blue-400 mb-4 group-hover:text-blue-300 transition-colors">
                                 {stat.label}
                             </div>
-                            <div className="text-4xl md:text-6xl font-outfit font-black text-white tracking-tighter uppercase leading-none group-hover:text-gradient transition-all duration-500">
+                            <div className="text-3xl md:text-5xl font-display font-black text-foreground tracking-tighter uppercase leading-none group-hover:text-gradient transition-all duration-500">
                                 <AnimatedNumber value={stat.value} />
                             </div>
                             <div className="mt-4 w-8 h-[2px] bg-blue-500/20 rounded-full group-hover:w-16 group-hover:bg-blue-500/40 transition-all duration-500"></div>

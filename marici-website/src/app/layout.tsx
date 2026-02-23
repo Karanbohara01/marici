@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Syne, Outfit, JetBrains_Mono } from "next/font/google";
+import { Outfit, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import ContentWrapper from "@/components/layout/ContentWrapper";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const syne = Syne({
-  variable: "--font-syne",
-  subsets: ["latin"],
-});
-
 const outfit = Outfit({
   variable: "--font-outfit",
+  subsets: ["latin"],
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
 });
 
@@ -51,7 +46,11 @@ export const dynamic = "force-dynamic";
 
 async function getSettings() {
   try {
-    await connectToDatabase();
+    try {
+      await connectToDatabase();
+    } catch (e) {
+      console.error("Failed to connect to database in layout helper");
+    }
     return await SiteSettings.findOne().lean();
   } catch (error) {
     console.error("Failed to fetch settings in layout:", error);
@@ -70,7 +69,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${syne.variable} ${outfit.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground selection:bg-accent selection:text-white flex flex-col min-h-screen`}
+        className={`${outfit.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground selection:bg-accent selection:text-white flex flex-col min-h-screen`}
       >
         <script
           type="application/ld+json"

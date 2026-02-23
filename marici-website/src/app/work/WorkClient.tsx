@@ -38,16 +38,16 @@ export default function WorkClient() {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-slate-950">
+            <div className="min-h-screen flex items-center justify-center bg-background">
                 <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-slate-950">
+        <div className="min-h-screen bg-background">
             {/* Header Section */}
-            <section className="relative pt-32 pb-20 overflow-hidden bg-slate-950">
+            <section className="relative pt-32 pb-12 overflow-hidden bg-background border-b border-slate-200">
                 {/* Background Elements */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                     <motion.div
@@ -83,17 +83,17 @@ export default function WorkClient() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-6xl md:text-8xl font-black mb-10 leading-[0.9] text-white tracking-tight uppercase"
+                            className="mb-10 text-foreground tracking-tight uppercase"
                         >
                             Engineering <br />
-                            <span className="text-gradient">Innovations</span>.
+                            <span className="text-gradient">Innovations</span>
                         </motion.h1>
 
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-xl md:text-2xl text-slate-300 leading-relaxed max-w-2xl font-medium"
+                            className="text-slate-500 max-w-2xl font-medium"
                         >
                             Architecting robust solutions that solve critical technical challenges
                             for enterprises worldwide.
@@ -104,65 +104,56 @@ export default function WorkClient() {
 
             {/* Projects Grid */}
             <section className="container mx-auto px-6 max-w-7xl py-12 pb-32">
-                <div className="grid grid-cols-1 gap-24">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {projects.map((project, index) => (
                         <motion.div
                             key={project._id || index}
-                            initial={{ opacity: 0, y: 60 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
                         >
                             <Link
                                 href={project.link || "#"}
-                                className="group flex flex-col lg:flex-row gap-12 lg:gap-20"
+                                className="group block bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-blue-200 hover:shadow-md transition-all duration-300"
                             >
-                                {/* Project Image Container */}
-                                <div className="lg:w-3/5 relative aspect-[16/10] lg:aspect-auto lg:h-[600px] overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 shadow-premium group-hover:shadow-2xl transition-all duration-700">
+                                {/* Project Image */}
+                                <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                                     <Image
-                                        src={project.imageUrl || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop"}
+                                        src={project.imageUrl || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop"}
                                         alt={project.title}
                                         fill
-                                        className="object-cover scale-100 group-hover:scale-105 transition-transform duration-1000 opacity-90 group-hover:opacity-100"
+                                        className="object-cover group-hover:scale-105 transition-transform duration-700"
                                     />
-                                    <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-slate-950/0 transition-colors duration-700" />
-
-                                    {/* Project Badge */}
-                                    <div className="absolute top-8 left-8 z-20">
-                                        <div className="px-5 py-2 rounded-2xl bg-slate-950/80 backdrop-blur-md border border-white/10 shadow-xl flex items-center gap-2.5">
-                                            <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                                            <span className="text-[10px] font-jet-mono font-black uppercase tracking-[0.2em] text-white">
+                                    {/* Category Badge */}
+                                    <div className="absolute top-4 left-4">
+                                        <div className="px-3 py-1 rounded-lg bg-slate-950/75 backdrop-blur-sm flex items-center gap-2">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                                            <span className="text-[10px] font-bold uppercase tracking-widest text-white">
                                                 {project.category}
                                             </span>
                                         </div>
                                     </div>
-
-                                    {/* Hover Icon */}
-                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                        <div className="w-16 h-16 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-2xl scale-50 group-hover:scale-100 transition-transform duration-500">
-                                            <ExternalLink className="w-6 h-6" />
-                                        </div>
-                                    </div>
                                 </div>
 
-                                {/* Project Content */}
-                                <div className="lg:w-2/5 flex flex-col justify-center py-4">
-                                    <h2 className="text-4xl lg:text-5xl font-black text-white mb-8 tracking-tight group-hover:text-blue-400 transition-colors leading-[1.1] uppercase">
+                                {/* Card Content */}
+                                <div className="p-5">
+                                    <h2 className="text-base font-bold text-foreground uppercase tracking-tight mb-2 group-hover:text-blue-800 transition-colors">
                                         {project.title}
                                     </h2>
 
                                     {project.description && (
-                                        <p className="text-slate-400 text-lg leading-relaxed mb-10 font-medium">
+                                        <p className="text-slate-500 text-sm leading-relaxed mb-4 line-clamp-2">
                                             {project.description}
                                         </p>
                                     )}
 
                                     {project.tags && project.tags.length > 0 && (
-                                        <div className="flex flex-wrap gap-2.5 mb-12">
-                                            {project.tags.map((tag, tagIndex) => (
+                                        <div className="flex flex-wrap gap-1.5 mb-4">
+                                            {project.tags.slice(0, 4).map((tag, tagIndex) => (
                                                 <span
                                                     key={tagIndex}
-                                                    className="px-4 py-1.5 rounded-xl bg-slate-800/50 border border-slate-700/50 text-slate-400 text-[10px] font-jet-mono font-black uppercase tracking-widest group-hover:border-blue-500/20 group-hover:text-blue-400 transition-all"
+                                                    className="px-2 py-1 rounded-md bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-wide"
                                                 >
                                                     {tag}
                                                 </span>
@@ -170,10 +161,9 @@ export default function WorkClient() {
                                         </div>
                                     )}
 
-                                    <div className="flex items-center gap-4 text-[11px] font-jet-mono font-black uppercase tracking-[0.4em] text-slate-300 group-hover:text-blue-400 transition-colors group">
-                                        Exploration
-                                        <div className="h-px w-12 bg-slate-800 group-hover:w-20 group-hover:bg-blue-400 transition-all duration-500"></div>
-                                        <ArrowRight className="w-4 h-4 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500" />
+                                    <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-blue-800 pt-3 border-t border-slate-100">
+                                        View Project
+                                        <ArrowRight className="w-3.5 h-3.5 -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
                                     </div>
                                 </div>
                             </Link>
@@ -183,9 +173,9 @@ export default function WorkClient() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-32 bg-slate-900/50 border-t border-slate-900 border-dashed relative overflow-hidden">
+            <section className="py-32 bg-slate-50 border-t border-slate-200 border-dashed relative overflow-hidden">
                 <div className="container mx-auto px-6 max-w-4xl text-center relative z-10">
-                    <h3 className="text-4xl md:text-6xl font-black text-white mb-10 tracking-tight uppercase leading-none">
+                    <h3 className="text-foreground mb-10 tracking-tight uppercase leading-none">
                         Ready to build your <br />
                         <span className="text-gradient">next breakthrough?</span>
                     </h3>
